@@ -1,0 +1,38 @@
+.login-constraint .banner {
+	background: url(/style/image/banner.png)#4d8eb4 center bottom/contain no-repeat;
+	width: 100%;
+	height: 240px;
+}
+.login-constraint .main {
+	width: 300px;
+	margin: 0 auto;
+}
+.login-constraint form {
+	margin-top: 20px;
+}
+.login-constraint .form-control {
+	display: inline-block;
+	width: 100%;
+	margin-top: 20px;
+}
+.login-constraint .form-control input {
+	padding: 12px;
+	font-size: 16px;
+	line-height: 20px;
+}
+.login-constraint .btn-line-green {
+	display: inline-block;
+	color: #8bc34a;
+	text-align: center;
+	text-decoration: none;
+	padding: 12px;
+	font-size: 16px;
+	width: 100%;
+	border-radius: 3px;
+	box-sizing: border-box;
+	border: 1px solid #8bc34a;
+}
+.login-constraint .btn-line-green:hover {
+	background: #8bc34a;
+	color: #fff;
+}

@@ -1,0 +1,28 @@
+{
+  "name": "onigiri",
+  "version": "0.0.0",
+  "description": "a bug track tool",
+  "main": "",
+  "scripts": {},
+  "author": "dp.gaoyuan@gmail.com",
+  "license": "Gaoyuan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freewind/grunt-bower-angular-demo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/freewind/grunt-bower-angular-demo/issues"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-webserver": "^0.9.1",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.12.37",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-firefox-launcher": "^0.1.6",
+    "karma-jasmine": "^0.3.6",
+    "karma-junit-reporter": "^0.2.2",
+    "karma-requirejs": "^0.2.2",
+    "requirejs": "^2.1.18"
+  }
+}

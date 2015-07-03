@@ -1,0 +1,21 @@
+{
+  "name": "onigiri",
+  "version": "0.0.0",
+  "moduleType": [
+    "amd"
+  ],
+  "authors": [
+    "dp.gaoyuan@gmail.com"
+  ],
+  "license": "Gaoyuan",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.4.1"
+  }
+}
