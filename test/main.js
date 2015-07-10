@@ -1,16 +1,19 @@
 var tests = [];
 for (var file in window.__karma__.files) {
-    if (/spec\.js$/.test(file)) {
-        tests.push(file);
-    }
+	if (window.__karma__.files.hasOwnProperty(file)) {
+		if (/spec\.js$/.test(file)) {
+			tests.push(file);
+		}
+	}
 }
+console.log(tests);
 
 requirejs.config({
-    // Karma serves files from '/base'
-    baseUrl: '/base/src',
+	// Karma serves files from '/base'
+	baseUrl: '/base/app',
 
-    paths: {
-        angular: '../bower_components/angular/angular.min',
+	paths: {
+		angular: '../bower_components/angular/angular.min',
 		ngAnimate: '../bower_components/angular-animate/angular-animate.min',
 		ngSanitize: '../bower_components/angular-sanitize/angular-sanitize.min',
 		ngAria: '../bower_components/angular-aria/angular-aria.min',
@@ -18,17 +21,18 @@ requirejs.config({
 		ngRoute: '../bower_components/angular-route/angular-route.min',
 		ngUIRouter: '../bower_components/angular-ui-router/release/angular-ui-router.min',
 		ngBindonce: '../bower_components/angular-bindonce/bindonce.min',
-		
-		//all controllers
-		appControllers: '../app.src/loader/controller.all',
-		//all routes
-		appRoutes: '../app.src/loader/route.all',
-		
-		startup: '../app.src/app'
-    },
+		angularMocks: '../bower_components/angular-mocks/angular-mocks',
 
-    shim: {
-        angular: {
+		//all controllers
+		appControllers: '../app/loader/controller.all',
+		//all routes
+		appRoutes: '../app/loader/route.all',
+
+		startup: '../app/app'
+	},
+
+	shim: {
+		angular: {
 			exports: 'angular'
 		},
 		ngSanitize: {
@@ -46,6 +50,10 @@ requirejs.config({
 		ngMaterial: {
 			exports: 'ngMaterial',
 			deps: ['angular', 'ngAnimate', 'ngAria']
+		},
+		angularMocks: {
+			exports: 'angularMocks',
+			deps: ['angular']
 		},
 		ngRoute: {
 			exports: 'ngRoute',
@@ -65,11 +73,11 @@ requirejs.config({
 				'angular', 'ngUIRouter', 'ngSanitize', 'ngBindonce', 'ngMaterial'
 			]
 		}
-    },
+	},
 
-    // ask Require.js to load these files (all our tests)
-    deps: tests,
+	// ask Require.js to load these files (all our tests)
+	deps: tests,
 
-    // start test run, once Require.js is done
-    callback: window.__karma__.start
+	// start test run, once Require.js is done
+	callback: window.__karma__.start
 });

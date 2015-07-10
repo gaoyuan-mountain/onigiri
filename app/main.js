@@ -9,13 +9,14 @@ require.config({
 		ngRoute: '../bower_components/angular-route/angular-route.min',
 		ngUIRouter: '../bower_components/angular-ui-router/release/angular-ui-router.min',
 		ngBindonce: '../bower_components/angular-bindonce/bindonce.min',
+		angularMocks: '../bower_components/angular-mocks/angular-mocks',
 		
 		//all controllers
-		appControllers: '../app.src/loader/controller.all',
+		appControllers: '../app/loader/controller.all',
 		//all routes
-		appRoutes: '../app.src/loader/route.all',
+		appRoutes: '../app/loader/route.all',
 		
-		startup: '../app.src/app'
+		startup: '../app/app'
 	},
 	shim: {
 		angular: {
@@ -31,6 +32,10 @@ require.config({
 		},
 		ngAria: {
 			exports: 'ngAria',
+			deps: ['angular']
+		},
+		angularMocks: {
+			exports: 'angularMocks',
 			deps: ['angular']
 		},
 		ngMaterial: {

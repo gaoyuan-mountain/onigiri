@@ -1,6 +1,6 @@
 define([
-	'../app.src/login/login.route',
-	'../app.src/projects/projects.route'
+	'../app/login/login.route',
+	'../app/projects/projects.route'
 ], function () {
 		var routes = arguments;
 		return {

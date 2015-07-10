@@ -16,6 +16,10 @@
     "tests"
   ],
   "devDependencies": {
-    "angular-mocks": "~1.4.1"
+    "angular-mocks": "~1.4.1",
+    "angular-translate": "~2.7.2",
+    "angular-translate-loader-static-files": "~2.7.2",
+    "angular-cookies": "~1.4.1",
+    "angular-translate-storage-cookie": "~2.7.2"
   }
 }

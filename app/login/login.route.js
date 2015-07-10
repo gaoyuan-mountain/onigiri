@@ -9,11 +9,11 @@ define([], function () {
 					$stateProvider
 						.state('login', {
 						url: '/login',
-						templateUrl: 'app.src/login/login.html'
+						templateUrl: 'app/login/login.html'
 					})
 						.state('default', {
 						url: '/',
-						templateUrl: 'app.src/login/login.html'
+						templateUrl: 'app/login/login.html'
 					});
 				}
 			]);

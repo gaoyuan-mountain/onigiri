@@ -9,7 +9,7 @@ define([], function () {
 					$stateProvider
 						.state('projects', {
 						url: '/projects',
-						templateUrl: 'app.src/projects/projects.html'
+						templateUrl: 'app/projects/projects.html'
 					});
 				}
 			]);
