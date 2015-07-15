@@ -11,7 +11,9 @@ define([
 			angular.module('Filters', []);
 			angular.module('Routes', ['ui.router']);
 			angular.module('app', [
-				'ngMaterial',
+				'ngSanitize',
+				//'ngAnimate',
+				'ui.bootstrap',
 				'pasvaz.bindonce',
 				'Controllers',
 				'Directives',
@@ -20,13 +22,8 @@ define([
 				'Routes'
 			]).config([
 				'$locationProvider',
-				'$mdThemingProvider',
-				function ($locationProvider, $mdThemingProvider) {
-					$locationProvider.html5Mode(true);
-
-					$mdThemingProvider.theme('default')
-						.primaryPalette('pink')
-						.accentPalette('orange');
+				function ($locationProvider) {
+					//$locationProvider.html5Mode(true);
 				}
 			]);
 

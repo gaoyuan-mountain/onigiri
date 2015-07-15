@@ -1,0 +1,27 @@
+.project {
+    background: #fff;
+    padding: 15px;
+    -webkit-box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, .5);
+    margin-top: 20px;
+    cursor: pointer;
+}
+.project a {
+	color: #777;
+}
+.project-logo {
+    float: left;
+    width: 42px;
+    height: 42px;
+    background: url(/style/image/project-logo.png) no-repeat;
+    background-size: contain;
+    margin-right: 20px;
+}
+.project h2 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+.project p {
+    margin-bottom: 0;
+    font-size: 13px;
+}

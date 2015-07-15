@@ -1,0 +1,93 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="cancel()">×</button>
+</div>
+<div class="modal-body">
+	<form class="form-horizontal">
+		<fieldset>
+			<div class="form-group">
+				<label for="issueType" class="col-lg-2 control-label">Type</label>
+				<div class="radio col-lg-2">
+					<label>
+						<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"> New feature
+					</label>
+				</div>
+				<div class="radio col-lg-2">
+					<label>
+						<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked=""> Bug
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issueTitle" class="col-lg-2 control-label">Title</label>
+				<div class="col-lg-9">
+					<input type="text" class="form-control" id="issueTitle" placeholder="title">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 control-label">Assignee</label>
+				<div class="col-lg-9">
+					<select class="form-control" id="select">
+						<option>Gaoyuan</option>
+						<option>Wufang</option>
+						<option>Fantuan</option>
+						<option>Shixi</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-lg-2 control-label">Browser</label>
+				<div class="col-lg-3">
+					<select class="form-control" id="browser">
+						<option>Chrome</option>
+						<option>Firefox</option>
+						<option>Safari</option>
+						<option>360</option>
+						<option>IE</option>
+						<option>All</option>
+					</select>
+				</div>
+				<div class="col-lg-3">
+					<input type="text" class="form-control" id="browserVersion" placeholder="version">
+				</div>
+				<div class="col-lg-3">
+					<input type="text" class="form-control" id="platform" placeholder="platform">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issueUrl" class="col-lg-2 control-label">Url</label>
+				<div class="col-lg-3">
+					<input type="text" class="form-control" id="issueUrl" placeholder="url">
+				</div>
+				<div class="col-lg-3">
+					<input type="text" class="form-control" id="issueVersion" placeholder="version">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issueAccount" class="col-lg-2 control-label">Account</label>
+				<div class="col-lg-3">
+					<input type="text" class="form-control" id="issueAccount" placeholder="account">
+				</div>
+				<div class="col-lg-3">
+					<input type="text" class="form-control" id="issuePassword" placeholder="password">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issueDescription" class="col-lg-2 control-label">Description</label>
+				<div class="col-lg-9">
+					<textarea class="form-control" rows="3" id="issueDescription"></textarea>
+					<span class="help-block">Should tell The more detailed the better.</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="issueDescription" class="col-lg-2 control-label">Attachment</label>
+				<div class="col-lg-9">
+					<a href="#" class="btn btn-success btn-sm">Upload</a>
+				</div>
+			</div>
+		</fieldset>
+	</form>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+	<button type="button" class="btn btn-primary">Send</button>
+</div>

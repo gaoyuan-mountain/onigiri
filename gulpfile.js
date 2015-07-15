@@ -6,8 +6,7 @@ gulp.task('webserver', function () {
 	gulp.src('./').pipe(webserver({
 		host: 'localhost',
 		port: 3000,
-		path: '/',
-		fallback: 'index.html'
+		path: '/'
 	}));
 });
 

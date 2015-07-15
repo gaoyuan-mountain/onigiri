@@ -17,7 +17,6 @@ requirejs.config({
 		ngAnimate: '../bower_components/angular-animate/angular-animate.min',
 		ngSanitize: '../bower_components/angular-sanitize/angular-sanitize.min',
 		ngAria: '../bower_components/angular-aria/angular-aria.min',
-		ngMaterial: '../bower_components/angular-material/angular-material.min',
 		ngRoute: '../bower_components/angular-route/angular-route.min',
 		ngUIRouter: '../bower_components/angular-ui-router/release/angular-ui-router.min',
 		ngBindonce: '../bower_components/angular-bindonce/bindonce.min',
@@ -47,10 +46,6 @@ requirejs.config({
 			exports: 'ngAria',
 			deps: ['angular']
 		},
-		ngMaterial: {
-			exports: 'ngMaterial',
-			deps: ['angular', 'ngAnimate', 'ngAria']
-		},
 		angularMocks: {
 			exports: 'angularMocks',
 			deps: ['angular']
@@ -70,7 +65,7 @@ requirejs.config({
 		startup: {
 			exports: 'startup',
 			deps: [
-				'angular', 'ngUIRouter', 'ngSanitize', 'ngBindonce', 'ngMaterial'
+				'angular', 'ngUIRouter', 'ngSanitize', 'ngBindonce'
 			]
 		}
 	},

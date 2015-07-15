@@ -1,6 +1,8 @@
 define([
 	'../app/login/login.controller',
-	'../app/projects/projects.controller'
+	'../app/projects/projects.controller',
+	'../app/issues/list/list.controller',
+	'../app/issues/detail/detail.controller'
 ], function () {
 	var controllers = arguments;
 	return {

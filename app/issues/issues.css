@@ -1,0 +1,22 @@
+.issue-edit-popover {
+	font-size: 13px;
+}
+
+.issue-edit-popover .btn-sm {
+	font-size: 12px;
+	margin-top: 3px;
+}
+
+.issue-filter {
+	margin-top: 20px;
+}
+
+.issue-filter a {
+	color: #aaa;
+	text-shadow: 1px 1px 0 #fff;
+}
+
+.issue-filter .active a, .issue-filter a .badge {
+	color: #fff;
+	text-shadow: none;
+}

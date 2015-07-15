@@ -1,0 +1,11 @@
+.navbar-default {
+    background: #fff;
+    -webkit-box-shadow: 0 0 2px 0 rgba(0, 0, 0, .5);
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, .5);
+}
+
+.navbar-brand {
+    text-indent: -999px;
+    width: 100px;
+    background: url(/style/image/logo.png) center center no-repeat;
+}

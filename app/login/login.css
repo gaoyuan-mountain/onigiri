@@ -10,15 +10,20 @@
 .login-constraint form {
 	margin-top: 20px;
 }
-.login-constraint .form-control {
+.login-constraint .form-group {
 	display: inline-block;
 	width: 100%;
 	margin-top: 20px;
 }
-.login-constraint .form-control input {
+.login-constraint .form-group input {
 	padding: 12px;
 	font-size: 16px;
 	line-height: 20px;
+	box-shadow: none;
+	border: 1px solid #ccc;
+}
+.login-constraint .form-group input:focus {
+	box-shadow: none;
 }
 .login-constraint .btn-line-green {
 	display: inline-block;
@@ -26,7 +31,7 @@
 	color: #fff;
 	text-align: center;
 	text-decoration: none;
-	padding: 12px;
+	padding: 6px;
 	font-size: 16px;
 	width: 100%;
 	border-radius: 3px;

@@ -4,13 +4,16 @@
 <head>
     <base href="/">
     <title>onigiri</title>
+    <link rel='stylesheet' href='style/css/bootstrap.min.css' />
     <link rel='stylesheet' href='style/css/reset.css' />
-    <link rel='stylesheet' href='bower_components/angular-material/angular-material.css' />
+    <link rel='stylesheet' href='app/common/header/header.css' />
     <link rel='stylesheet' href='app/login/login.css' />
+    <link rel='stylesheet' href='app/projects/projects.css' />
+    <link rel='stylesheet' href='app/issues/issues.css' />
 </head>
 
 <body>
-    <div ui-view></div>
+    <div ui-view class="main-view"></div>
    
     <script data-main="/app/main" src="/bower_components/requirejs/require.js"></script>
 </body>

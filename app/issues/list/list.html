@@ -1,0 +1,45 @@
+<div ng-controller="issuesListController" class="stage">
+	<div class="main-constraint">
+		<div class="col-lg-2">
+			<ul class="issue-filter nav nav-pills nav-stacked">
+				<li class="active">
+					<a href="#">
+						All issues
+						<span class="badge">42</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						Assigned to me
+						<span class="badge">4</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						Created by me
+						<span class="badge">2</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-lg-10">
+			<ul class="projects">
+				<li class="project clearfix" ng-click="openIssueDetail(1)">
+					<div class="project-logo"></div>
+					<h2>This is issue name</h2>
+					<p>This is issue description</p>
+				</li>
+				<li class="project clearfix" ng-click="openIssueDetail(2)">
+					<div class="project-logo"></div>
+					<h2>This is issue name</h2>
+					<p>This is issue description</p>
+				</li>
+				<li class="project clearfix" ng-click="openIssueDetail(3)">
+					<div class="project-logo"></div>
+					<h2>This is issue name</h2>
+					<p>This is issue description</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
