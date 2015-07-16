@@ -8,7 +8,7 @@
 }
 
 .issue-filter {
-	margin-top: 63px;
+	margin-top: 35px;
 }
 
 .issue-filter a {
@@ -19,4 +19,13 @@
 .issue-filter .active a, .issue-filter a .badge {
 	color: #fff;
 	text-shadow: none;
+}
+.new-issue-btn {
+	position: absolute;
+	right: 0;
+	top: 15px;
+}
+.issue-list-main {
+	position: relative;
+	margin-top: 20px;
 }
