@@ -16,7 +16,7 @@ define([], function () {
 								data: issueId
 							}
 						});
-					};;
+					};
 				}
 			]);
 		}

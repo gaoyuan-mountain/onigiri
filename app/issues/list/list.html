@@ -1,68 +1,70 @@
 <div ng-controller="issuesListController" class="stage">
 	<div class="main-constraint">
-		<div class="col-lg-2">
-			<ul class="issue-filter nav nav-pills nav-stacked">
-				<li class="active">
-					<a href="#">
-						All issues
-						<span class="badge pull-right">42</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						Assigned to me
-						<span class="badge pull-right">4</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						Created by me
-						<span class="badge pull-right">2</span>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div class="col-lg-10">
-			<div class="issue-list-main">
-				<a class="new-issue-btn btn btn-primary btn-sm">New issue</a>
-				<!-- Nav tabs -->
-				<ul class="nav nav-tabs" role="tablist">
-					<li role="presentation" class="active"><a href="" aria-controls="open" role="tab" data-toggle="tab">Open</a></li>
-					<li role="presentation"><a href="" aria-controls="doing" role="tab" data-toggle="tab">Doing</a></li>
-					<li role="presentation"><a href="" aria-controls="closed" role="tab" data-toggle="tab">Closed</a></li>
+		<div class="main-offset-constraint">
+			<div class="col-lg-2">
+				<ul class="issue-filter nav nav-pills nav-stacked">
+					<li class="active">
+						<a href="#">
+							All issues
+							<span class="badge pull-right">42</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							Assigned to me
+							<span class="badge pull-right">4</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							Created by me
+							<span class="badge pull-right">2</span>
+						</a>
+					</li>
 				</ul>
-				<!-- Tab panes -->
-				<div class="tab-content">
-					<div role="tabpanel" class="tab-pane active" id="open">
-						<ul class="projects">
-							<li class="project clearfix" ng-click="openIssueDetail(1)">
-								<div class="project-logo"></div>
-								<h2>This is issue name</h2>
-								<p>This is issue description</p>
-							</li>
-							<li class="project clearfix" ng-click="openIssueDetail(2)">
-								<div class="project-logo"></div>
-								<h2>This is issue name</h2>
-								<p>This is issue description</p>
-							</li>
-							<li class="project clearfix" ng-click="openIssueDetail(3)">
-								<div class="project-logo"></div>
-								<h2>This is issue name</h2>
-								<p>This is issue description</p>
-							</li>
+			</div>
+			<div class="col-lg-10">
+				<div class="issue-list-main">
+					<a class="new-issue-btn btn btn-primary btn-sm" ng-click="openIssueDetail()">New issue</a>
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						<li role="presentation" class="active"><a href="" aria-controls="open" role="tab" data-toggle="tab">Open</a></li>
+						<li role="presentation"><a href="" aria-controls="doing" role="tab" data-toggle="tab">Doing</a></li>
+						<li role="presentation"><a href="" aria-controls="closed" role="tab" data-toggle="tab">Closed</a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="open">
+							<ul class="projects">
+								<li class="project clearfix" ng-click="openIssueDetail(1)">
+									<div class="project-logo"></div>
+									<h2>This is issue name</h2>
+									<p>This is issue description</p>
+								</li>
+								<li class="project clearfix" ng-click="openIssueDetail(2)">
+									<div class="project-logo"></div>
+									<h2>This is issue name</h2>
+									<p>This is issue description</p>
+								</li>
+								<li class="project clearfix" ng-click="openIssueDetail(3)">
+									<div class="project-logo"></div>
+									<h2>This is issue name</h2>
+									<p>This is issue description</p>
+								</li>
+							</ul>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="doing">...</div>
+						<div role="tabpanel" class="tab-pane" id="closed">...</div>
+					</div>
+					<div class="pagination-wrap">
+						<ul class="pagination pagination-sm">
+							<li class="disabled"><a href="#">«</a></li>
+							<li class="active"><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">»</a></li>
 						</ul>
 					</div>
-					<div role="tabpanel" class="tab-pane" id="doing">...</div>
-					<div role="tabpanel" class="tab-pane" id="closed">...</div>
-				</div>
-				<div class="pagination-wrap">
-					<ul class="pagination pagination-sm">
-						<li class="disabled"><a href="#">«</a></li>
-						<li class="active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">»</a></li>
-					</ul>
 				</div>
 			</div>
 		</div>
