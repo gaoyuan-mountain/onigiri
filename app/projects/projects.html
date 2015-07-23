@@ -1,7 +1,7 @@
 <div ng-include="'./app/common/header/header.html'"></div>
 <div ng-controller="projectsController" class="stage">
 	<div class="main-constraint">
-		<ul class="projects">
+		<ul class="projects clearfix">
 			<li class="project clearfix">
 				<a ui-sref="issues.list({id: 1})">
 					<div class="project-logo"></div>
@@ -11,6 +11,13 @@
 			</li>
 			<li class="project clearfix">
 				<a ui-sref="issues.list({id: 2})">
+					<div class="project-logo"></div>
+					<h2>This is project name</h2>
+					<p>This is project description</p>
+				</a>
+			</li>
+			<li class="project clearfix">
+				<a ui-sref="issues.list({id: 3})">
 					<div class="project-logo"></div>
 					<h2>This is project name</h2>
 					<p>This is project description</p>

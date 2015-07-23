@@ -28,3 +28,31 @@
 .main-offset-constraint {
 	margin-left: -16.66666667%;
 }
+.issue {
+    background: #fff;
+    padding: 15px;
+    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    margin-top: 20px;
+    cursor: pointer;
+}
+.issue a {
+	color: #777;
+}
+.issue-logo {
+    float: left;
+    width: 42px;
+    height: 42px;
+    background: url(/style/image/project-logo.png) no-repeat;
+    background-size: contain;
+    margin-right: 20px;
+}
+.issue h2 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+.issue p {
+    margin-bottom: 0;
+    font-size: 13px;
+}
