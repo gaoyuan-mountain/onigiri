@@ -1,0 +1,18 @@
+<nav class="navbar navbar-default navbar-fixed-top" bs-navbar ng-controller="headerController">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Onigiri</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li ui-sref-active="active"><a ui-sref="projects()">Projects</a></li>
+        <li ui-sref-active="active"><a ui-sref="milestone()" ng-class="{active: $state.includes('milestone')}">Milestone</a></li>
+        <li><a>Groups</a></li>
+    </ul>
+    <div class="setting-constraint pull-right">
+        <div class="nav-handler">
+            <a class="nav-icons glyphicon glyphicon-plus-sign" popover-template="createPopover.templateUrl" popover-placement="bottom"></a>
+        </div>
+        <div class="nav-handler">
+            <a class="user-setting"></a>
+        </div>
+    </div>
+</nav>
