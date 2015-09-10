@@ -1,0 +1,36 @@
+.milestone {
+	background: #fff;
+    padding: 15px;
+	-webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+	box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    margin-top: 40px;
+    cursor: pointer;
+}
+.milestone .progress {
+	margin-top: 5px;
+}
+.milestone-meta-info strong {
+	font-size: 20px;
+	font-weight: normal;
+}
+.milestone .title {
+	font-size: 18px;
+	font-weight: normal;
+	position: relative;
+	top: 4px;
+}
+.milestone-time {
+	color: #f2727e;
+	margin-left: 15px;
+}
+.completion-rate {
+	height: 70px;
+	line-height: 70px;
+	text-align: center;
+	font-size: 44px;
+}
+.completion-rate i {
+	font-style: normal;
+	font-size: 32px;
+	margin-left: 5px;
+}
