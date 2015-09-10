@@ -21,11 +21,5 @@ module.exports = {
 			exclude: 'node_modules',
 			loader: 'style!css'
 		}]
-	},
-	plugins: [
-		new webpack.optimize.UglifyJsPlugin({
-			sourceMap: false,
-			mangle: false
-		})
-	]
+	}
 }

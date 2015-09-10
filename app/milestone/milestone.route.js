@@ -8,14 +8,10 @@ module.exports = {
 			'$urlRouterProvider',
 			function ($stateProvider, $urlRouterProvider) {
 				$stateProvider
-					.state('login', {
-					url: '/login',
-					templateUrl: 'app/login/login.html'
-				})
-					.state('default', {
-					url: '/',
-					templateUrl: 'app/login/login.html'
-				});
+					.state('milestone', {
+						url: '/milestone',
+						templateUrl: 'app/milestone/milestone.html'
+					});
 			}
 		]);
 	}

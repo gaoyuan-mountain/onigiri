@@ -1,0 +1,35 @@
+.step-constraint {
+	position: relative;
+	height: 80px;
+	margin: 0 120px;
+}
+.step-line {
+	position: absolute;
+	top: 40px;
+	height: 4px;
+	width: 100%;
+	margin-top: -2px;
+	background: rgba(33, 150, 243, .5);
+}
+.step-node {
+	position: absolute;
+	top: 0;
+	margin-left: -40px;
+	background: #fff;
+}
+.step-node > div {
+	width: 80px;
+	height: 80px;
+	border-radius: 40px;
+	background: rgba(33, 150, 243, .5);
+	color: #fff;
+	text-align: center;
+	font-size: 14px;
+	line-height: 80px;
+	cursor: pointer;
+}
+.step-node.active > div {
+	background: rgba(33, 150, 243, 1);
+	-webkit-transition: .2s all ease-out;
+	-webkit-transform: scale(1.2);
+}
