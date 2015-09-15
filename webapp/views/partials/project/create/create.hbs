@@ -1,0 +1,46 @@
+<div ng-controller="projectCreateController" class="stage">
+	<div class="main-constraint project-detail">
+		<ul class="breadcrumb">
+			<li><a ui-sref="project.list()">Projects</a></li>
+			<li class="active">Create</li>
+		</ul>
+		<div class="project-new-form">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group">
+						<label for="projectTitle" class="col-lg-2 control-label">Title:</label>
+						<div class="col-lg-9">
+							<input type="text" class="form-control" id="projectTitle" placeholder="title">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Members:</label>
+						<div class="col-lg-9">
+							<ul>
+								<li class="member" ng-click="selectAssignee(member)" ng-class="{selected: assignee === member}" ng-repeat="member in members" title="{[{member.name}]}">
+									<img class="member-avatar" ng-src="{[{member.figure}]}" />
+								</li>
+								<li class="member invate">
+									<a></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="projectDescription" class="col-lg-2 control-label">Description:</label>
+						<div class="col-lg-9">
+							<textarea class="form-control" rows="5" id="projectDescription"></textarea>
+							<span class="help-block">Should tell The more detailed the better.</span>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<div class="clearfix" style="margin-top: 30px;">
+				<div class="pull-right">
+					<button type="button" class="btn btn-primary">Create</button>
+					<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
