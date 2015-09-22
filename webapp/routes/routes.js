@@ -1,45 +1,43 @@
-var user = require('../controllers/users.controller');
-var common = require('../controllers/common.controller');
-var login = require('../controllers/login.controller');
-var project = require('../controllers/project.controller');
-var issues = require('../controllers/issues.controller');
-var milestone = require('../controllers/milestone.controller');
+/* global . */
+var user = require('./users.route');
+var index = require('./index.route');
+var login = require('./login.route');
+var project = require('./project.route');
+var issues = require('./issues.route');
+var milestone = require('./milestone.route');
+var attachment = require('./attachment.route');
+
+var multer  = require('multer');
+var upload = multer({ dest: '/uploads/' });
 
 module.exports = function (app) {
-	app.get('/', common.index);
-	app.get('/index', common.index);
-	app.get('/login', common.index);
-	app.get('/project', common.index);
-	app.get('/project/list', common.index);
-	app.get('/project/create', common.index);
-	app.get('/issues', common.index);
-	app.get('/issues/:projectId', common.index);
-	app.get('/issues/:projectId/create', common.index);
-	app.get('/issues/:projectId/detail/:issueId', common.index);
+	app.get('/', index.view);
+	app.get('/index', index.view);
+	app.get('/login', index.view);
+	app.get('/project', index.view);
+	app.get('/project/list', index.view);
+	app.get('/project/create', index.view);
+	app.get('/issues', index.view);
+	app.get('/issues/:projectId', index.view);
+	app.get('/issues/:projectId/create', index.view);
+	app.get('/issues/:projectId/detail/:issueId', index.view);
 	
 	//app initialization
 	app.get('/init/superadmin', user.setSuperAdmin);
-
-	//common
-	app.get('/partials/common/header', common.header.template)
 	
 	//login
-	app.get('/partials/login', login.template);
 	app.post('/api/login', login.login);
 	
 	//project
-	app.get('/partials/project', project.template.index);
-	app.get('/partials/project/list', project.template.list);
-	app.get('/partials/project/create', project.template.create);
+	app.post('/api/project/create', project.create);
+	app.get('/api/project/getAll', project.getAll);
 	
 	//issues
-	app.get('/partials/issues/index', issues.template.index);
-	app.get('/partials/issues/list', issues.template.list);
-	app.get('/partials/issues/create', issues.template.create);
-	app.get('/partials/issues/detail', issues.template.detail);
+	
+	//attachment
+	app.post('/api/attachment/upload', upload.single('file'), attachment.create);
 	
 	//milestone
-	app.get('/partials/milestone/index', milestone.template.index);
 
 	/*
 	app.post('/user/create', user.create);

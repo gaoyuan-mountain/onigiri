@@ -7,17 +7,23 @@ module.exports = {
 			'$scope',
 			'$state',
 			'$stateParams',
-			function ($scope, $state, $stateParams) {
-				$scope.issue = {
-					assignee: null
-				};
+			'IssueService',
+			function ($scope, $state, $stateParams, IssueService) {
+				$scope.issue = IssueService.instance();
 
-				$scope.issueStausConfig = [
-					{name: 'Open', active: true},
-					{name: 'Doing', active: false},
-					{name: 'Checking', active: false},
-					{name: 'Closed', active: false}
+				$scope.issueStatusConfig = [
+					{name: 'Open', active: true, val: 0},
+					{name: 'Doing', active: false, val: 1},
+					{name: 'Checking', active: false, val: 2},
+					{name: 'Closed', active: false, val: 3}
 				];
+				
+				$scope.browsers = [
+					{name: 'Chrome'}, {name: 'Firefox'}, {name: 'Safari'}, 
+					{name: '360'}, {name: 'IE'}, {name: 'Sougou'}
+				];
+				
+				$scope.attachment = null;
 
 				$scope.members = [{
 					id: 0,
@@ -40,6 +46,14 @@ module.exports = {
 					email: 'dp.gaoyuan@gmail.com',
 					figure: '/style/image/avatar4.png'
 				}];
+				
+				$scope.addBrowser = function () {
+					$scope.issue.props.browsers.push({
+						name: 'Chrome',
+						version: '',
+						system: ''
+					});
+				};
 
 				$scope.cancel = function () {
 					$state.go('issues.list', {
@@ -54,6 +68,15 @@ module.exports = {
 						$scope.assignee = member;
 					}
 				};
+				
+				$scope.$watch('attachment', function (attachment) {
+					if (!attachment) {
+						return;
+					}
+					IssueService.uploadAttachment(attachment).then(function (response) {
+						console.log(response);
+					});
+				});
 			}
 		]);
 	}

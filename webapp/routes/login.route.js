@@ -3,10 +3,6 @@ var userDao = require('./../dao/user.dao');
 var crypto = require('crypto');
 var session = require('express-session');
 
-exports.template = function (req, res) {
-    res.render('partials/login/login');
-};
-
 exports.login = function (req, res) {
     user.findOne({
         email: req.body.email,

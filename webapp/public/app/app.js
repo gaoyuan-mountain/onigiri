@@ -8,6 +8,7 @@ import 'angular-sanitize';
 import 'angular-bindonce';
 import  * as controllers from './loader/controller.all';
 import * as services from './loader/service.all';
+import * as directives from './loader/directive.all';
 import * as routes from './loader/route.all';
 import './components/step/step.module';
 
@@ -38,13 +39,12 @@ angular.module('app', [
 	'$interpolateProvider',
 	function ($locationProvider, $interpolateProvider) {
 		$locationProvider.html5Mode(true);
-		$interpolateProvider.startSymbol('{[{');
-        $interpolateProvider.endSymbol('}]}');
 	}
 ]);
 
 controllers.inject();
 services.inject();
+directives.inject();
 routes.inject();
 
 angular.element(document).ready(function () {

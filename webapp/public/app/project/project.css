@@ -66,6 +66,6 @@
     display: inline-block;
     width: 32px;
     height: 32px;
-    background: url(/style/image/plus.png) center center no-repeat;
+    background: url(/style/image/plus.png) 0 0 no-repeat;
     margin: 4px;
 }

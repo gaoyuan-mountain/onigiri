@@ -48,41 +48,45 @@
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	__webpack_require__(1);
-	
 	__webpack_require__(3);
 	
 	__webpack_require__(5);
 	
-	__webpack_require__(6);
-	
 	__webpack_require__(7);
+	
+	__webpack_require__(8);
 	
 	__webpack_require__(9);
 	
-	var _loaderControllerAll = __webpack_require__(10);
+	__webpack_require__(11);
+	
+	var _loaderControllerAll = __webpack_require__(12);
 	
 	var controllers = _interopRequireWildcard(_loaderControllerAll);
 	
-	var _loaderServiceAll = __webpack_require__(18);
+	var _loaderServiceAll = __webpack_require__(20);
 	
 	var services = _interopRequireWildcard(_loaderServiceAll);
 	
-	var _loaderRouteAll = __webpack_require__(20);
+	var _loaderDirectiveAll = __webpack_require__(1);
+	
+	var directives = _interopRequireWildcard(_loaderDirectiveAll);
+	
+	var _loaderRouteAll = __webpack_require__(24);
 	
 	var routes = _interopRequireWildcard(_loaderRouteAll);
 	
-	__webpack_require__(25);
-	
-	__webpack_require__(30);
-	
-	__webpack_require__(32);
+	__webpack_require__(29);
 	
 	__webpack_require__(34);
 	
 	__webpack_require__(36);
 	
 	__webpack_require__(38);
+	
+	__webpack_require__(40);
+	
+	__webpack_require__(42);
 	
 	angular.module('Controllers', []);
 	angular.module('Directives', []);
@@ -91,12 +95,11 @@
 	angular.module('Routes', ['ui.router']);
 	angular.module('app', ['ngSanitize', 'ui.bootstrap', 'pasvaz.bindonce', 'Controllers', 'Directives', 'Services', 'Filters', 'Routes', 'gy.step']).config(['$locationProvider', '$interpolateProvider', function ($locationProvider, $interpolateProvider) {
 		$locationProvider.html5Mode(true);
-		$interpolateProvider.startSymbol('{[{');
-		$interpolateProvider.endSymbol('}]}');
 	}]);
 	
 	controllers.inject();
 	services.inject();
+	directives.inject();
 	routes.inject();
 	
 	angular.element(document).ready(function () {
@@ -109,11 +112,57 @@
 
 	'use strict';
 	
-	__webpack_require__(2);
-	module.exports = angular;
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+	
+	var _directivesFilemodelDirective = __webpack_require__(2);
+	
+	var filemodel = _interopRequireWildcard(_directivesFilemodelDirective);
+	
+	module.exports = {
+		inject: function inject() {
+			filemodel.inject();
+		}
+	};
 
 /***/ },
 /* 2 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = {
+		inject: function inject() {
+			var module = angular.module('Directives');
+	
+			module.directive('fileModel', ['$parse', function ($parse) {
+				return {
+					restrict: 'A',
+					link: function link(scope, element, attrs) {
+						var model = $parse(attrs.fileModel);
+						var modelSetter = model.assign;
+	
+						element.bind('change', function () {
+							scope.$apply(function () {
+								modelSetter(scope, element[0].files[0]);
+							});
+						});
+					}
+				};
+			}]);
+		}
+	};
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	__webpack_require__(4);
+	module.exports = angular;
+
+/***/ },
+/* 4 */
 /***/ function(module, exports) {
 
 	/**
@@ -14747,16 +14796,16 @@
 	bindJQuery();publishExternalAPI(angular);jqLite(document).ready(function(){angularInit(document,bootstrap);});})(window,document);!window.angular.$$csp() && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(4);
+	__webpack_require__(6);
 	module.exports = 'ngRoute';
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	/**
@@ -15717,7 +15766,7 @@
 	})(window, window.angular);
 
 /***/ },
-/* 5 */
+/* 7 */
 /***/ function(module, exports) {
 
 	/**
@@ -17946,7 +17995,7 @@
 	 */$IncludedByStateFilter.$inject = ['$state'];function $IncludedByStateFilter($state){var includesFilter=function includesFilter(state){return $state.includes(state);};includesFilter.$stateful = true;return includesFilter;}angular.module('ui.router.state').filter('isState',$IsStateFilter).filter('includedByState',$IncludedByStateFilter);})(window,window.angular);
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports) {
 
 	/*
@@ -18441,16 +18490,16 @@
 	var dismissClickHandler=function dismissClickHandler(evt){if(element[0] !== evt.target){resetMatches();scope.$digest();}};$document.bind('click',dismissClickHandler);originalScope.$on('$destroy',function(){$document.unbind('click',dismissClickHandler);if(appendToBody){$popup.remove();}});var $popup=$compile(popUpEl)(scope);if(appendToBody){$document.find('body').append($popup);}else {element.after($popup);}}};}]).directive('typeaheadPopup',function(){return {restrict:'EA',scope:{matches:'=',query:'=',active:'=',position:'=',select:'&'},replace:true,templateUrl:'template/typeahead/typeahead-popup.html',link:function link(scope,element,attrs){scope.templateUrl = attrs.templateUrl;scope.isOpen = function(){return scope.matches.length > 0;};scope.isActive = function(matchIdx){return scope.active == matchIdx;};scope.selectActive = function(matchIdx){scope.active = matchIdx;};scope.selectMatch = function(activeIdx){scope.select({activeIdx:activeIdx});};}};}).directive('typeaheadMatch',['$http','$templateCache','$compile','$parse',function($http,$templateCache,$compile,$parse){return {restrict:'EA',scope:{index:'=',match:'=',query:'='},link:function link(scope,element,attrs){var tplUrl=$parse(attrs.templateUrl)(scope.$parent) || 'template/typeahead/typeahead-match.html';$http.get(tplUrl,{cache:$templateCache}).success(function(tplContent){element.replaceWith($compile(tplContent.trim())(scope));});}};}]).filter('typeaheadHighlight',function(){function escapeRegexp(queryToEscape){return queryToEscape.replace(/([.?*+^$[\]\\(){}|-])/g,'\\$1');}return function(matchItem,query){return query?('' + matchItem).replace(new RegExp(escapeRegexp(query),'gi'),'<strong>$&</strong>'):matchItem;};});angular.module("template/accordion/accordion-group.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/accordion/accordion-group.html","<div class=\"panel panel-default\">\n" + "  <div class=\"panel-heading\">\n" + "    <h4 class=\"panel-title\">\n" + "      <a href class=\"accordion-toggle\" ng-click=\"toggleOpen()\" accordion-transclude=\"heading\"><span ng-class=\"{'text-muted': isDisabled}\">{{heading}}</span></a>\n" + "    </h4>\n" + "  </div>\n" + "  <div class=\"panel-collapse\" collapse=\"!isOpen\">\n" + "	  <div class=\"panel-body\" ng-transclude></div>\n" + "  </div>\n" + "</div>\n" + "");}]);angular.module("template/accordion/accordion.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/accordion/accordion.html","<div class=\"panel-group\" ng-transclude></div>");}]);angular.module("template/alert/alert.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/alert/alert.html","<div class=\"alert\" ng-class=\"['alert-' + (type || 'warning'), closeable ? 'alert-dismissable' : null]\" role=\"alert\">\n" + "    <button ng-show=\"closeable\" type=\"button\" class=\"close\" ng-click=\"close()\">\n" + "        <span aria-hidden=\"true\">&times;</span>\n" + "        <span class=\"sr-only\">Close</span>\n" + "    </button>\n" + "    <div ng-transclude></div>\n" + "</div>\n" + "");}]);angular.module("template/carousel/carousel.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/carousel/carousel.html","<div ng-mouseenter=\"pause()\" ng-mouseleave=\"play()\" class=\"carousel\" ng-swipe-right=\"prev()\" ng-swipe-left=\"next()\">\n" + "    <ol class=\"carousel-indicators\" ng-show=\"slides.length > 1\">\n" + "        <li ng-repeat=\"slide in slides track by $index\" ng-class=\"{active: isActive(slide)}\" ng-click=\"select(slide)\"></li>\n" + "    </ol>\n" + "    <div class=\"carousel-inner\" ng-transclude></div>\n" + "    <a class=\"left carousel-control\" ng-click=\"prev()\" ng-show=\"slides.length > 1\"><span class=\"glyphicon glyphicon-chevron-left\"></span></a>\n" + "    <a class=\"right carousel-control\" ng-click=\"next()\" ng-show=\"slides.length > 1\"><span class=\"glyphicon glyphicon-chevron-right\"></span></a>\n" + "</div>\n" + "");}]);angular.module("template/carousel/slide.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/carousel/slide.html","<div ng-class=\"{\n" + "    'active': leaving || (active && !entering),\n" + "    'prev': (next || active) && direction=='prev',\n" + "    'next': (next || active) && direction=='next',\n" + "    'right': direction=='prev',\n" + "    'left': direction=='next'\n" + "  }\" class=\"item text-center\" ng-transclude></div>\n" + "");}]);angular.module("template/datepicker/datepicker.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/datepicker/datepicker.html","<div ng-switch=\"datepickerMode\" role=\"application\" ng-keydown=\"keydown($event)\">\n" + "  <daypicker ng-switch-when=\"day\" tabindex=\"0\"></daypicker>\n" + "  <monthpicker ng-switch-when=\"month\" tabindex=\"0\"></monthpicker>\n" + "  <yearpicker ng-switch-when=\"year\" tabindex=\"0\"></yearpicker>\n" + "</div>");}]);angular.module("template/datepicker/day.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/datepicker/day.html","<table role=\"grid\" aria-labelledby=\"{{uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" + "  <thead>\n" + "    <tr>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-left\"></i></button></th>\n" + "      <th colspan=\"{{5 + showWeeks}}\"><button id=\"{{uniqueId}}-title\" role=\"heading\" aria-live=\"assertive\" aria-atomic=\"true\" type=\"button\" class=\"btn btn-default btn-sm\" ng-click=\"toggleMode()\" tabindex=\"-1\" style=\"width:100%;\"><strong>{{title}}</strong></button></th>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-right\"></i></button></th>\n" + "    </tr>\n" + "    <tr>\n" + "      <th ng-show=\"showWeeks\" class=\"text-center\"></th>\n" + "      <th ng-repeat=\"label in labels track by $index\" class=\"text-center\"><small aria-label=\"{{label.full}}\">{{label.abbr}}</small></th>\n" + "    </tr>\n" + "  </thead>\n" + "  <tbody>\n" + "    <tr ng-repeat=\"row in rows track by $index\">\n" + "      <td ng-show=\"showWeeks\" class=\"text-center h6\"><em>{{ weekNumbers[$index] }}</em></td>\n" + "      <td ng-repeat=\"dt in row track by dt.date\" class=\"text-center\" role=\"gridcell\" id=\"{{dt.uid}}\" aria-disabled=\"{{!!dt.disabled}}\">\n" + "        <button type=\"button\" style=\"width:100%;\" class=\"btn btn-default btn-sm\" ng-class=\"{'btn-info': dt.selected, active: isActive(dt)}\" ng-click=\"select(dt.date)\" ng-disabled=\"dt.disabled\" tabindex=\"-1\"><span ng-class=\"{'text-muted': dt.secondary, 'text-info': dt.current}\">{{dt.label}}</span></button>\n" + "      </td>\n" + "    </tr>\n" + "  </tbody>\n" + "</table>\n" + "");}]);angular.module("template/datepicker/month.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/datepicker/month.html","<table role=\"grid\" aria-labelledby=\"{{uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" + "  <thead>\n" + "    <tr>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-left\"></i></button></th>\n" + "      <th><button id=\"{{uniqueId}}-title\" role=\"heading\" aria-live=\"assertive\" aria-atomic=\"true\" type=\"button\" class=\"btn btn-default btn-sm\" ng-click=\"toggleMode()\" tabindex=\"-1\" style=\"width:100%;\"><strong>{{title}}</strong></button></th>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-right\"></i></button></th>\n" + "    </tr>\n" + "  </thead>\n" + "  <tbody>\n" + "    <tr ng-repeat=\"row in rows track by $index\">\n" + "      <td ng-repeat=\"dt in row track by dt.date\" class=\"text-center\" role=\"gridcell\" id=\"{{dt.uid}}\" aria-disabled=\"{{!!dt.disabled}}\">\n" + "        <button type=\"button\" style=\"width:100%;\" class=\"btn btn-default\" ng-class=\"{'btn-info': dt.selected, active: isActive(dt)}\" ng-click=\"select(dt.date)\" ng-disabled=\"dt.disabled\" tabindex=\"-1\"><span ng-class=\"{'text-info': dt.current}\">{{dt.label}}</span></button>\n" + "      </td>\n" + "    </tr>\n" + "  </tbody>\n" + "</table>\n" + "");}]);angular.module("template/datepicker/popup.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/datepicker/popup.html","<ul class=\"dropdown-menu\" ng-style=\"{display: (isOpen && 'block') || 'none', top: position.top+'px', left: position.left+'px'}\" ng-keydown=\"keydown($event)\">\n" + "	<li ng-transclude></li>\n" + "	<li ng-if=\"showButtonBar\" style=\"padding:10px 9px 2px\">\n" + "		<span class=\"btn-group pull-left\">\n" + "			<button type=\"button\" class=\"btn btn-sm btn-info\" ng-click=\"select('today')\">{{ getText('current') }}</button>\n" + "			<button type=\"button\" class=\"btn btn-sm btn-danger\" ng-click=\"select(null)\">{{ getText('clear') }}</button>\n" + "		</span>\n" + "		<button type=\"button\" class=\"btn btn-sm btn-success pull-right\" ng-click=\"close()\">{{ getText('close') }}</button>\n" + "	</li>\n" + "</ul>\n" + "");}]);angular.module("template/datepicker/year.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/datepicker/year.html","<table role=\"grid\" aria-labelledby=\"{{uniqueId}}-title\" aria-activedescendant=\"{{activeDateId}}\">\n" + "  <thead>\n" + "    <tr>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-left\" ng-click=\"move(-1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-left\"></i></button></th>\n" + "      <th colspan=\"3\"><button id=\"{{uniqueId}}-title\" role=\"heading\" aria-live=\"assertive\" aria-atomic=\"true\" type=\"button\" class=\"btn btn-default btn-sm\" ng-click=\"toggleMode()\" tabindex=\"-1\" style=\"width:100%;\"><strong>{{title}}</strong></button></th>\n" + "      <th><button type=\"button\" class=\"btn btn-default btn-sm pull-right\" ng-click=\"move(1)\" tabindex=\"-1\"><i class=\"glyphicon glyphicon-chevron-right\"></i></button></th>\n" + "    </tr>\n" + "  </thead>\n" + "  <tbody>\n" + "    <tr ng-repeat=\"row in rows track by $index\">\n" + "      <td ng-repeat=\"dt in row track by dt.date\" class=\"text-center\" role=\"gridcell\" id=\"{{dt.uid}}\" aria-disabled=\"{{!!dt.disabled}}\">\n" + "        <button type=\"button\" style=\"width:100%;\" class=\"btn btn-default\" ng-class=\"{'btn-info': dt.selected, active: isActive(dt)}\" ng-click=\"select(dt.date)\" ng-disabled=\"dt.disabled\" tabindex=\"-1\"><span ng-class=\"{'text-info': dt.current}\">{{dt.label}}</span></button>\n" + "      </td>\n" + "    </tr>\n" + "  </tbody>\n" + "</table>\n" + "");}]);angular.module("template/modal/backdrop.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/modal/backdrop.html","<div class=\"modal-backdrop fade {{ backdropClass }}\"\n" + "     ng-class=\"{in: animate}\"\n" + "     ng-style=\"{'z-index': 1040 + (index && 1 || 0) + index*10}\"\n" + "></div>\n" + "");}]);angular.module("template/modal/window.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/modal/window.html","<div tabindex=\"-1\" role=\"dialog\" class=\"modal fade\" ng-class=\"{in: animate}\" ng-style=\"{'z-index': 1050 + index*10, display: 'block'}\" ng-click=\"close($event)\">\n" + "    <div class=\"modal-dialog\" ng-class=\"{'modal-sm': size == 'sm', 'modal-lg': size == 'lg'}\"><div class=\"modal-content\" modal-transclude></div></div>\n" + "</div>");}]);angular.module("template/pagination/pager.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/pagination/pager.html","<ul class=\"pager\">\n" + "  <li ng-class=\"{disabled: noPrevious(), previous: align}\"><a href ng-click=\"selectPage(page - 1)\">{{getText('previous')}}</a></li>\n" + "  <li ng-class=\"{disabled: noNext(), next: align}\"><a href ng-click=\"selectPage(page + 1)\">{{getText('next')}}</a></li>\n" + "</ul>");}]);angular.module("template/pagination/pagination.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/pagination/pagination.html","<ul class=\"pagination\">\n" + "  <li ng-if=\"boundaryLinks\" ng-class=\"{disabled: noPrevious()}\"><a href ng-click=\"selectPage(1)\">{{getText('first')}}</a></li>\n" + "  <li ng-if=\"directionLinks\" ng-class=\"{disabled: noPrevious()}\"><a href ng-click=\"selectPage(page - 1)\">{{getText('previous')}}</a></li>\n" + "  <li ng-repeat=\"page in pages track by $index\" ng-class=\"{active: page.active}\"><a href ng-click=\"selectPage(page.number)\">{{page.text}}</a></li>\n" + "  <li ng-if=\"directionLinks\" ng-class=\"{disabled: noNext()}\"><a href ng-click=\"selectPage(page + 1)\">{{getText('next')}}</a></li>\n" + "  <li ng-if=\"boundaryLinks\" ng-class=\"{disabled: noNext()}\"><a href ng-click=\"selectPage(totalPages)\">{{getText('last')}}</a></li>\n" + "</ul>");}]);angular.module("template/tooltip/tooltip-html-unsafe-popup.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/tooltip/tooltip-html-unsafe-popup.html","<div class=\"tooltip {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" + "  <div class=\"tooltip-arrow\"></div>\n" + "  <div class=\"tooltip-inner\" bind-html-unsafe=\"content\"></div>\n" + "</div>\n" + "");}]);angular.module("template/tooltip/tooltip-popup.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/tooltip/tooltip-popup.html","<div class=\"tooltip {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" + "  <div class=\"tooltip-arrow\"></div>\n" + "  <div class=\"tooltip-inner\" ng-bind=\"content\"></div>\n" + "</div>\n" + "");}]);angular.module("template/popover/popover.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/popover/popover.html","<div class=\"popover {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" + "  <div class=\"arrow\"></div>\n" + "\n" + "  <div class=\"popover-inner\">\n" + "      <h3 class=\"popover-title\" ng-bind=\"title\" ng-show=\"title\"></h3>\n" + "      <div class=\"popover-content\" ng-bind=\"content\"></div>\n" + "  </div>\n" + "</div>\n" + "");}]);angular.module("template/progressbar/bar.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/progressbar/bar.html","<div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: percent + '%'}\" aria-valuetext=\"{{percent | number:0}}%\" ng-transclude></div>");}]);angular.module("template/progressbar/progress.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/progressbar/progress.html","<div class=\"progress\" ng-transclude></div>");}]);angular.module("template/progressbar/progressbar.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/progressbar/progressbar.html","<div class=\"progress\">\n" + "  <div class=\"progress-bar\" ng-class=\"type && 'progress-bar-' + type\" role=\"progressbar\" aria-valuenow=\"{{value}}\" aria-valuemin=\"0\" aria-valuemax=\"{{max}}\" ng-style=\"{width: percent + '%'}\" aria-valuetext=\"{{percent | number:0}}%\" ng-transclude></div>\n" + "</div>");}]);angular.module("template/rating/rating.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/rating/rating.html","<span ng-mouseleave=\"reset()\" ng-keydown=\"onKeydown($event)\" tabindex=\"0\" role=\"slider\" aria-valuemin=\"0\" aria-valuemax=\"{{range.length}}\" aria-valuenow=\"{{value}}\">\n" + "    <i ng-repeat=\"r in range track by $index\" ng-mouseenter=\"enter($index + 1)\" ng-click=\"rate($index + 1)\" class=\"glyphicon\" ng-class=\"$index < value && (r.stateOn || 'glyphicon-star') || (r.stateOff || 'glyphicon-star-empty')\">\n" + "        <span class=\"sr-only\">({{ $index < value ? '*' : ' ' }})</span>\n" + "    </i>\n" + "</span>");}]);angular.module("template/tabs/tab.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/tabs/tab.html","<li ng-class=\"{active: active, disabled: disabled}\">\n" + "  <a href ng-click=\"select()\" tab-heading-transclude>{{heading}}</a>\n" + "</li>\n" + "");}]);angular.module("template/tabs/tabset.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/tabs/tabset.html","<div>\n" + "  <ul class=\"nav nav-{{type || 'tabs'}}\" ng-class=\"{'nav-stacked': vertical, 'nav-justified': justified}\" ng-transclude></ul>\n" + "  <div class=\"tab-content\">\n" + "    <div class=\"tab-pane\" \n" + "         ng-repeat=\"tab in tabs\" \n" + "         ng-class=\"{active: tab.active}\"\n" + "         tab-content-transclude=\"tab\">\n" + "    </div>\n" + "  </div>\n" + "</div>\n" + "");}]);angular.module("template/timepicker/timepicker.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/timepicker/timepicker.html","<table>\n" + "	<tbody>\n" + "		<tr class=\"text-center\">\n" + "			<td><a ng-click=\"incrementHours()\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n" + "			<td>&nbsp;</td>\n" + "			<td><a ng-click=\"incrementMinutes()\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-up\"></span></a></td>\n" + "			<td ng-show=\"showMeridian\"></td>\n" + "		</tr>\n" + "		<tr>\n" + "			<td style=\"width:50px;\" class=\"form-group\" ng-class=\"{'has-error': invalidHours}\">\n" + "				<input type=\"text\" ng-model=\"hours\" ng-change=\"updateHours()\" class=\"form-control text-center\" ng-mousewheel=\"incrementHours()\" ng-readonly=\"readonlyInput\" maxlength=\"2\">\n" + "			</td>\n" + "			<td>:</td>\n" + "			<td style=\"width:50px;\" class=\"form-group\" ng-class=\"{'has-error': invalidMinutes}\">\n" + "				<input type=\"text\" ng-model=\"minutes\" ng-change=\"updateMinutes()\" class=\"form-control text-center\" ng-readonly=\"readonlyInput\" maxlength=\"2\">\n" + "			</td>\n" + "			<td ng-show=\"showMeridian\"><button type=\"button\" class=\"btn btn-default text-center\" ng-click=\"toggleMeridian()\">{{meridian}}</button></td>\n" + "		</tr>\n" + "		<tr class=\"text-center\">\n" + "			<td><a ng-click=\"decrementHours()\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n" + "			<td>&nbsp;</td>\n" + "			<td><a ng-click=\"decrementMinutes()\" class=\"btn btn-link\"><span class=\"glyphicon glyphicon-chevron-down\"></span></a></td>\n" + "			<td ng-show=\"showMeridian\"></td>\n" + "		</tr>\n" + "	</tbody>\n" + "</table>\n" + "");}]);angular.module("template/typeahead/typeahead-match.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/typeahead/typeahead-match.html","<a tabindex=\"-1\" bind-html-unsafe=\"match.label | typeaheadHighlight:query\"></a>");}]);angular.module("template/typeahead/typeahead-popup.html",[]).run(["$templateCache",function($templateCache){$templateCache.put("template/typeahead/typeahead-popup.html","<ul class=\"dropdown-menu\" ng-show=\"isOpen()\" ng-style=\"{top: position.top+'px', left: position.left+'px'}\" style=\"display: block;\" role=\"listbox\" aria-hidden=\"{{!isOpen()}}\">\n" + "    <li ng-repeat=\"match in matches track by $index\" ng-class=\"{active: isActive($index) }\" ng-mouseenter=\"selectActive($index)\" ng-click=\"selectMatch($index)\" role=\"option\" id=\"{{match.id}}\">\n" + "        <div typeahead-match index=\"$index\" match=\"match\" query=\"query\" template-url=\"templateUrl\"></div>\n" + "    </li>\n" + "</ul>\n" + "");}]);
 
 /***/ },
-/* 7 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(8);
+	__webpack_require__(10);
 	module.exports = 'ngSanitize';
 
 /***/ },
-/* 8 */
+/* 10 */
 /***/ function(module, exports) {
 
 	/**
@@ -19093,7 +19142,7 @@
 	})(window, window.angular);
 
 /***/ },
-/* 9 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19341,38 +19390,38 @@
 	})();
 
 /***/ },
-/* 10 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _loginLoginController = __webpack_require__(11);
+	var _loginLoginController = __webpack_require__(13);
 	
 	var loginController = _interopRequireWildcard(_loginLoginController);
 	
-	var _projectListListController = __webpack_require__(12);
+	var _projectListListController = __webpack_require__(14);
 	
 	var projectListController = _interopRequireWildcard(_projectListListController);
 	
-	var _projectCreateCreateController = __webpack_require__(13);
+	var _projectCreateCreateController = __webpack_require__(15);
 	
 	var projectCreateController = _interopRequireWildcard(_projectCreateCreateController);
 	
-	var _commonHeaderHeaderController = __webpack_require__(14);
+	var _commonHeaderHeaderController = __webpack_require__(16);
 	
 	var headerController = _interopRequireWildcard(_commonHeaderHeaderController);
 	
-	var _issuesListListController = __webpack_require__(15);
+	var _issuesListListController = __webpack_require__(17);
 	
 	var issuesListController = _interopRequireWildcard(_issuesListListController);
 	
-	var _issuesCreateCreateController = __webpack_require__(16);
+	var _issuesCreateCreateController = __webpack_require__(18);
 	
 	var issuesCreateController = _interopRequireWildcard(_issuesCreateCreateController);
 	
-	var _issuesDetailDetailController = __webpack_require__(17);
+	var _issuesDetailDetailController = __webpack_require__(19);
 	
 	var issuesDetailController = _interopRequireWildcard(_issuesDetailDetailController);
 	
@@ -19389,7 +19438,7 @@
 	};
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19418,7 +19467,7 @@
 	};
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19426,12 +19475,22 @@
 	module.exports = {
 		inject: function inject() {
 			var module = angular.module('Controllers');
-			module.controller('projectListController', ['$scope', function ($scope) {}]);
+			module.controller('projectListController', ['$scope', 'ProjectService', function ($scope, ProjectService) {
+				$scope.projects = [];
+	
+				$scope.getAllProjects = function () {
+					ProjectService.getAll().then(function (response) {
+						$scope.projects = response.data || [];
+					});
+				};
+	
+				$scope.getAllProjects();
+			}]);
 		}
 	};
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19439,7 +19498,7 @@
 	module.exports = {
 		inject: function inject() {
 			var module = angular.module('Controllers');
-			module.controller('projectCreateController', ['$scope', function ($scope) {
+			module.controller('projectCreateController', ['$scope', 'ProjectService', '$state', function ($scope, ProjectService, $state) {
 				$scope.members = [{
 					id: 0,
 					name: 'gaoyuan',
@@ -19461,12 +19520,22 @@
 					email: 'dp.gaoyuan@gmail.com',
 					figure: '/style/image/avatar4.png'
 				}];
+	
+				$scope.project = ProjectService.instance({});
+	
+				$scope.create = function () {
+					ProjectService.create($scope.project).then(function (response) {
+						if (response.data._id) {
+							$state.go('project.list');
+						}
+					});
+				};
 			}]);
 		}
 	};
 
 /***/ },
-/* 14 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19493,7 +19562,7 @@
 	};
 
 /***/ },
-/* 15 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19519,7 +19588,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19527,12 +19596,14 @@
 	module.exports = {
 		inject: function inject() {
 			var module = angular.module('Controllers');
-			module.controller('issuesCreateController', ['$scope', '$state', '$stateParams', function ($scope, $state, $stateParams) {
-				$scope.issue = {
-					assignee: null
-				};
+			module.controller('issuesCreateController', ['$scope', '$state', '$stateParams', 'IssueService', function ($scope, $state, $stateParams, IssueService) {
+				$scope.issue = IssueService.instance();
 	
-				$scope.issueStausConfig = [{ name: 'Open', active: true }, { name: 'Doing', active: false }, { name: 'Checking', active: false }, { name: 'Closed', active: false }];
+				$scope.issueStatusConfig = [{ name: 'Open', active: true, val: 0 }, { name: 'Doing', active: false, val: 1 }, { name: 'Checking', active: false, val: 2 }, { name: 'Closed', active: false, val: 3 }];
+	
+				$scope.browsers = [{ name: 'Chrome' }, { name: 'Firefox' }, { name: 'Safari' }, { name: '360' }, { name: 'IE' }, { name: 'Sougou' }];
+	
+				$scope.attachment = null;
 	
 				$scope.members = [{
 					id: 0,
@@ -19556,6 +19627,14 @@
 					figure: '/style/image/avatar4.png'
 				}];
 	
+				$scope.addBrowser = function () {
+					$scope.issue.props.browsers.push({
+						name: 'Chrome',
+						version: '',
+						system: ''
+					});
+				};
+	
 				$scope.cancel = function () {
 					$state.go('issues.list', {
 						projectId: $stateParams.projectId
@@ -19569,12 +19648,21 @@
 						$scope.assignee = member;
 					}
 				};
+	
+				$scope.$watch('attachment', function (attachment) {
+					if (!attachment) {
+						return;
+					}
+					IssueService.uploadAttachment(attachment).then(function (response) {
+						console.log(response);
+					});
+				});
 			}]);
 		}
 	};
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19629,25 +19717,35 @@
 	};
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _servicesUserService = __webpack_require__(19);
+	var _servicesUserService = __webpack_require__(21);
 	
-	var _servicesUserService2 = _interopRequireDefault(_servicesUserService);
+	var userService = _interopRequireWildcard(_servicesUserService);
+	
+	var _servicesProjectService = __webpack_require__(22);
+	
+	var projectService = _interopRequireWildcard(_servicesProjectService);
+	
+	var _servicesIssueService = __webpack_require__(23);
+	
+	var issueService = _interopRequireWildcard(_servicesIssueService);
 	
 	module.exports = {
 		inject: function inject() {
-			_servicesUserService2['default'].inject();
+			userService.inject();
+			projectService.inject();
+			issueService.inject();
 		}
 	};
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19701,26 +19799,168 @@
 	};
 
 /***/ },
-/* 20 */
+/* 22 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = {
+		inject: function inject() {
+			var module = angular.module('Services');
+	
+			var Project = function Project(prop) {
+				var _prop = prop || {};
+				this.props = angular.extend({
+					_id: null,
+					title: '',
+					description: ''
+				}, _prop);
+			};
+	
+			Project.prototype.reset = function () {
+				this.props._id = null;
+			};
+	
+			Project.prototype.get = function (key) {
+				return this.props[key];
+			};
+	
+			Project.prototype.set = function (prop) {
+				angular.extend(this.props, prop);
+			};
+	
+			module.service('ProjectService', ['$http', function ($http) {
+				this.instance = function (props) {
+					return new Project(props);
+				};
+	
+				this.create = function (project) {
+					return $http.post('/api/project/create', {
+						title: project.get('title'),
+						description: project.get('description')
+					});
+				};
+	
+				this.getAll = function () {
+					return $http.get('/api/project/getAll');
+				};
+			}]);
+		}
+	};
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = {
+		inject: function inject() {
+			var module = angular.module('Services');
+	
+			/**
+	  * issue model definition
+	  * @props
+	  *   _id {String}
+	  *   title {String}
+	  *   url {String}
+	  *   assignee {Integer}
+	  *	browsers {Array[Object]}
+	  *		name {String}
+	  *		version {String}
+	  *		system {String}
+	  *	account {Object}
+	  *		name {String}
+	  *		password {String}
+	  *	description {String}
+	  *	attachments {Array[Object]}
+	  *		name {String}
+	  *		size {String}
+	  *		_id	{String}
+	  *	prior {Integer}
+	  *	status {Integer} 0:open / 1:doing / 2:checking / 3:closed
+	  */
+			var Issue = function Issue(prop) {
+				var _prop = prop || {};
+				this.props = angular.extend({
+					_id: null,
+					title: '',
+					url: '',
+					assignee: null,
+					browsers: [{
+						name: 'Chrome',
+						version: '',
+						system: ''
+					}],
+					account: {},
+					description: '',
+					attachments: [],
+					prior: 0,
+					status: 0
+				}, _prop);
+			};
+	
+			Issue.prototype.reset = function () {
+				this.props._id = null;
+			};
+	
+			Issue.prototype.get = function (key) {
+				return this.props[key];
+			};
+	
+			Issue.prototype.set = function (prop) {
+				angular.extend(this.props, prop);
+			};
+	
+			module.service('IssueService', ['$http', function ($http) {
+				this.instance = function (props) {
+					return new Issue(props);
+				};
+	
+				this.create = function (issue) {
+					// return $http.post('/api/project/create', {
+					// 	title: project.get('title'),
+					// 	description: project.get('description')
+					// });
+				};
+	
+				this.getAll = function () {
+					// return $http.get('/api/project/getAll');
+				};
+	
+				this.uploadAttachment = function (file) {
+					var form = new FormData();
+					form.append('file', file);
+					return $http.post('/api/attachment/upload', form, {
+						transformRequest: angular.identity,
+						headers: { 'Content-Type': undefined }
+					});
+				};
+			}]);
+		}
+	};
+
+/***/ },
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _loginLoginRoute = __webpack_require__(21);
+	var _loginLoginRoute = __webpack_require__(25);
 	
 	var loginRouter = _interopRequireWildcard(_loginLoginRoute);
 	
-	var _projectProjectRoute = __webpack_require__(22);
+	var _projectProjectRoute = __webpack_require__(26);
 	
 	var projectRouter = _interopRequireWildcard(_projectProjectRoute);
 	
-	var _issuesIssuesRoute = __webpack_require__(23);
+	var _issuesIssuesRoute = __webpack_require__(27);
 	
 	var issuesRouter = _interopRequireWildcard(_issuesIssuesRoute);
 	
-	var _milestoneMilestoneRoute = __webpack_require__(24);
+	var _milestoneMilestoneRoute = __webpack_require__(28);
 	
 	var milestoneRouter = _interopRequireWildcard(_milestoneMilestoneRoute);
 	
@@ -19734,7 +19974,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19745,17 +19985,17 @@
 			module.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 				$stateProvider.state('login', {
 					url: '/login',
-					templateUrl: 'partials/login'
+					templateUrl: '/app/login/login.html'
 				}).state('default', {
 					url: '/',
-					templateUrl: 'partials/login'
+					templateUrl: '/app/login/login.html'
 				});
 			}]);
 		}
 	};
 
 /***/ },
-/* 22 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19766,20 +20006,20 @@
 			module.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 				$stateProvider.state('project', {
 					url: '/project',
-					templateUrl: 'partials/project'
+					templateUrl: '/app/project/project.html'
 				}).state('project.list', {
 					url: '/list',
-					templateUrl: 'partials/project/list'
+					templateUrl: '/app/project/list/list.html'
 				}).state('project.create', {
 					url: '/create',
-					templateUrl: 'partials/project/create'
+					templateUrl: '/app/project/create/create.html'
 				});
 			}]);
 		}
 	};
 
 /***/ },
-/* 23 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19790,23 +20030,23 @@
 			module.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 				$stateProvider.state('issues', {
 					url: '/issues',
-					templateUrl: 'partials/issues/index'
+					templateUrl: '/app/issues/issues.html'
 				}).state('issues.list', {
 					url: '/:projectId',
-					templateUrl: 'partials/issues/list'
+					templateUrl: '/app/issues/list/list.html'
 				}).state('issues.detail', {
 					url: '/:projectId/detail/:issueId',
-					templateUrl: 'partials/issues/detail'
+					templateUrl: '/app/issues/detail/detail.html'
 				}).state('issues.create', {
 					url: '/:projectId/create',
-					templateUrl: 'partials/issues/create'
+					templateUrl: '/app/issues/create/create.html'
 				});
 			}]);
 		}
 	};
 
 /***/ },
-/* 24 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19824,14 +20064,14 @@
 	};
 
 /***/ },
-/* 25 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	__webpack_require__(1);
+	__webpack_require__(3);
 	
-	__webpack_require__(26);
+	__webpack_require__(30);
 	
 	var _module = angular.module('gy.step', []);
 	
@@ -19862,16 +20102,16 @@
 	_module.exports = _module;
 
 /***/ },
-/* 26 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(27);
+	var content = __webpack_require__(31);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(33)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -19888,10 +20128,10 @@
 	}
 
 /***/ },
-/* 27 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(32)();
 	// imports
 	
 	
@@ -19902,7 +20142,7 @@
 
 
 /***/ },
-/* 28 */
+/* 32 */
 /***/ function(module, exports) {
 
 	/*
@@ -19957,7 +20197,7 @@
 	};
 
 /***/ },
-/* 29 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -20182,16 +20422,16 @@
 
 
 /***/ },
-/* 30 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(31);
+	var content = __webpack_require__(35);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(33)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20208,30 +20448,30 @@
 	}
 
 /***/ },
-/* 31 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(32)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".login-constraint .banner {\r\n\tbackground: url(/style/image/banner.png) #4d8eb4 center bottom/contain no-repeat;\r\n\twidth: 100%;\r\n\theight: 240px;\r\n}\r\n.login-constraint .main {\r\n\twidth: 300px;\r\n\tmargin: 0 auto;\r\n}\r\n.login-constraint form {\r\n\tmargin-top: 20px;\r\n}\r\n.login-constraint .form-group {\r\n\tdisplay: inline-block;\r\n\twidth: 100%;\r\n\tmargin-top: 20px;\r\n}\r\n.login-constraint .form-group input {\r\n\tpadding: 12px;\r\n\tfont-size: 16px;\r\n\tline-height: 20px;\r\n\tbox-shadow: none;\r\n\tborder: 1px solid #ccc;\r\n}\r\n.login-constraint .form-group input:focus {\r\n\tbox-shadow: none;\r\n}\r\n.login-constraint .btn-line-green {\r\n\tdisplay: inline-block;\r\n\tbackground: #87c5e6;\r\n\tcolor: #fff;\r\n\ttext-align: center;\r\n\ttext-decoration: none;\r\n\tpadding: 6px;\r\n\tfont-size: 16px;\r\n\twidth: 100%;\r\n\tborder-radius: 3px;\r\n\tborder: 1px solid #87c5e6;\r\n\tcursor: pointer;\r\n}\r\n", ""]);
+	exports.push([module.id, ".login-constraint .banner {\r\n\tbackground: url(/style/image/banner.png) #4d8eb4 center bottom/contain no-repeat;\r\n\twidth: 100%;\r\n\theight: 240px;\r\n}\r\n.login-constraint .main {\r\n\twidth: 300px;\r\n\tmargin: 0 auto;\r\n}\r\n.login-constraint form {\r\n\tmargin-top: 20px;\r\n}\r\n.login-constraint .form-group {\r\n\tdisplay: inline-block;\r\n\twidth: 100%;\r\n\tmargin-top: 20px;\r\n}\r\n.login-constraint .form-group input {\r\n\tpadding: 12px;\r\n\tfont-size: 16px;\r\n\tline-height: 20px;\r\n\tbox-shadow: none;\r\n\tborder: 1px solid #ccc;\r\n}\r\n.login-constraint .form-group input:focus {\r\n\tbox-shadow: none;\r\n}\r\n.login-constraint input.btn-line-green {\r\n\tdisplay: inline-block;\r\n\tbackground: #87c5e6;\r\n\tcolor: #fff;\r\n\ttext-align: center;\r\n\ttext-decoration: none;\r\n\tfont-size: 16px;\r\n\twidth: 100%;\r\n\tborder-radius: 3px;\r\n\tborder: 1px solid #87c5e6;\r\n\tcursor: pointer;\r\n}\r\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 32 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(33);
+	var content = __webpack_require__(37);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(33)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20248,30 +20488,30 @@
 	}
 
 /***/ },
-/* 33 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(32)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".projects {\r\n    margin-top: 40px;\r\n}\r\n.project {\r\n    background: #fff;\r\n    padding: 15px;\r\n    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    margin: 10px;\r\n    cursor: pointer;\r\n    float: left;\r\n    width: 270px;\r\n    height: 80px;\r\n}\r\n.project a {\r\n\tcolor: #777;\r\n    display: block;\r\n    height: 100%;\r\n}\r\n.project-logo {\r\n    float: left;\r\n    width: 42px;\r\n    height: 42px;\r\n    background: url(/style/image/project-logo.png) no-repeat;\r\n    background-size: contain;\r\n    margin-right: 20px;\r\n}\r\n.project h2 {\r\n    font-size: 14px;\r\n    font-weight: bold;\r\n    margin-bottom: 9px;\r\n}\r\n.project p {\r\n    margin-bottom: 0;\r\n    font-size: 13px;\r\n}\r\n.project-detail {\r\n    margin: 80px auto;\r\n}\r\n.project-detail .project-new-form {\r\n    background: #fff;\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    padding: 40px 30px;\r\n}\r\n.project-detail .form-group {\r\n    margin-bottom: 30px;\r\n}\r\n.project-detail .member {\r\n    width: 40px;\r\n    height: 40px;\r\n    float: left;\r\n    margin-right: 20px;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    -webkit-transition: all .2s ease-out;\r\n}\r\n.project-detail .member img {\r\n    max-width: 100%;\r\n}\r\n.project-detail .member.selected {\r\n    box-shadow: 3px 3px 7px rgba(0,0,0,0.4);\r\n    -webkit-transform: scale(1.3);\r\n}\r\n.project-detail .member.invate a {\r\n    display: inline-block;\r\n    width: 32px;\r\n    height: 32px;\r\n    background: url(/style/image/plus.png) center center no-repeat;\r\n    margin: 4px;\r\n}", ""]);
+	exports.push([module.id, ".projects {\r\n    margin-top: 40px;\r\n}\r\n.project {\r\n    background: #fff;\r\n    padding: 15px;\r\n    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    margin: 10px;\r\n    cursor: pointer;\r\n    float: left;\r\n    width: 270px;\r\n    height: 80px;\r\n}\r\n.project a {\r\n\tcolor: #777;\r\n    display: block;\r\n    height: 100%;\r\n}\r\n.project-logo {\r\n    float: left;\r\n    width: 42px;\r\n    height: 42px;\r\n    background: url(/style/image/project-logo.png) no-repeat;\r\n    background-size: contain;\r\n    margin-right: 20px;\r\n}\r\n.project h2 {\r\n    font-size: 14px;\r\n    font-weight: bold;\r\n    margin-bottom: 9px;\r\n}\r\n.project p {\r\n    margin-bottom: 0;\r\n    font-size: 13px;\r\n}\r\n.project-detail {\r\n    margin: 80px auto;\r\n}\r\n.project-detail .project-new-form {\r\n    background: #fff;\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    padding: 40px 30px;\r\n}\r\n.project-detail .form-group {\r\n    margin-bottom: 30px;\r\n}\r\n.project-detail .member {\r\n    width: 40px;\r\n    height: 40px;\r\n    float: left;\r\n    margin-right: 20px;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    -webkit-transition: all .2s ease-out;\r\n}\r\n.project-detail .member img {\r\n    max-width: 100%;\r\n}\r\n.project-detail .member.selected {\r\n    box-shadow: 3px 3px 7px rgba(0,0,0,0.4);\r\n    -webkit-transform: scale(1.3);\r\n}\r\n.project-detail .member.invate a {\r\n    display: inline-block;\r\n    width: 32px;\r\n    height: 32px;\r\n    background: url(/style/image/plus.png) 0 0 no-repeat;\r\n    margin: 4px;\r\n}", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 34 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(35);
+	var content = __webpack_require__(39);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(33)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20288,10 +20528,10 @@
 	}
 
 /***/ },
-/* 35 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(32)();
 	// imports
 	
 	
@@ -20302,16 +20542,16 @@
 
 
 /***/ },
-/* 36 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(37);
+	var content = __webpack_require__(41);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(33)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20328,30 +20568,30 @@
 	}
 
 /***/ },
-/* 37 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(32)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".issue-edit-popover {\r\n\tfont-size: 13px;\r\n}\r\n.issue-edit-popover .btn-sm {\r\n\tfont-size: 12px;\r\n\tmargin-top: 3px;\r\n}\r\n.issue-filter {\r\n\tmargin-top: 35px;\r\n}\r\n.issue-filter a {\r\n\tcolor: #aaa;\r\n\ttext-shadow: 1px 1px 0 #fff;\r\n}\r\n.issue-filter .active a, .issue-filter a .badge {\r\n\tcolor: #fff;\r\n\ttext-shadow: none;\r\n}\r\n.new-issue-btn {\r\n\tposition: absolute;\r\n\tright: 0;\r\n\ttop: 15px;\r\n}\r\n.issue-list-main {\r\n\tposition: relative;\r\n\tmargin-top: 20px;\r\n}\r\n.main-offset-constraint {\r\n\tmargin-left: -16.66666667%;\r\n}\r\n.issue {\r\n    background: #fff;\r\n    padding: 15px;\r\n    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    margin-top: 20px;\r\n    cursor: pointer;\r\n}\r\n.issue a {\r\n\tcolor: #777;\r\n}\r\n.issue-logo {\r\n    float: left;\r\n    width: 42px;\r\n    height: 42px;\r\n    background: url(/style/image/project-logo.png) no-repeat;\r\n    background-size: contain;\r\n    margin-right: 20px;\r\n}\r\n.issue h2 {\r\n    font-size: 14px;\r\n    font-weight: bold;\r\n    margin-bottom: 9px;\r\n}\r\n.issue p {\r\n    margin-bottom: 0;\r\n    font-size: 13px;\r\n}\r\n.issue-detail {\r\n    margin: 80px auto;\r\n}\r\n.issue-detail .issue-new-form {\r\n    background: #fff;\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    padding: 40px 30px;\r\n}\r\n.issue-detail .form-group {\r\n    margin-bottom: 30px;\r\n}\r\n.issue-detail .member {\r\n    width: 40px;\r\n    height: 40px;\r\n    float: left;\r\n    margin-right: 20px;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    -webkit-transition: all .2s ease-out;\r\n}\r\n.issue-detail .member img {\r\n    max-width: 100%;\r\n}\r\n.issue-detail .member.selected {\r\n    box-shadow: 3px 3px 7px rgba(0,0,0,0.4);\r\n    -webkit-transform: scale(1.3);\r\n}", ""]);
+	exports.push([module.id, ".issue-edit-popover {\r\n\tfont-size: 13px;\r\n}\r\n.issue-edit-popover .btn-sm {\r\n\tfont-size: 12px;\r\n\tmargin-top: 3px;\r\n}\r\n.issue-filter {\r\n\tmargin-top: 35px;\r\n}\r\n.issue-filter a {\r\n\tcolor: #aaa;\r\n\ttext-shadow: 1px 1px 0 #fff;\r\n}\r\n.issue-filter .active a, .issue-filter a .badge {\r\n\tcolor: #fff;\r\n\ttext-shadow: none;\r\n}\r\n.new-issue-btn {\r\n\tposition: absolute;\r\n\tright: 0;\r\n\ttop: 15px;\r\n}\r\n.issue-list-main {\r\n\tposition: relative;\r\n\tmargin-top: 20px;\r\n}\r\n.issue {\r\n    background: #fff;\r\n    padding: 15px;\r\n    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    margin-top: 20px;\r\n    cursor: pointer;\r\n}\r\n.issue a {\r\n\tcolor: #777;\r\n}\r\n.issue-logo {\r\n    float: left;\r\n    width: 42px;\r\n    height: 42px;\r\n    background: url(/style/image/project-logo.png) no-repeat;\r\n    background-size: contain;\r\n    margin-right: 20px;\r\n}\r\n.issue h2 {\r\n    font-size: 14px;\r\n    font-weight: bold;\r\n    margin-bottom: 9px;\r\n}\r\n.issue p {\r\n    margin-bottom: 0;\r\n    font-size: 13px;\r\n}\r\n.issue-detail {\r\n    margin: 80px auto;\r\n}\r\n.issue-detail .issue-new-form {\r\n    background: #fff;\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    padding: 40px 30px;\r\n}\r\n.issue-detail .form-group {\r\n    margin-bottom: 30px;\r\n}\r\n.issue-detail .member {\r\n    width: 40px;\r\n    height: 40px;\r\n    float: left;\r\n    margin-right: 20px;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    -webkit-transition: all .2s ease-out;\r\n}\r\n.issue-detail .member img {\r\n    max-width: 100%;\r\n}\r\n.issue-detail .member.selected {\r\n    box-shadow: 3px 3px 7px rgba(0,0,0,0.4);\r\n    -webkit-transform: scale(1.3);\r\n}\r\n.add-test-environment {\r\n    display: inline-block;\r\n    width: 32px;\r\n    height: 32px;\r\n    background: url(/style/image/plus.png) 0 0 no-repeat;\r\n    margin: 4px;\r\n    cursor: pointer;\r\n}\r\n.add-test-environment:hover {\r\n    background-position: 0 -32px;\r\n}\r\n.issue-detail .browser {\r\n    margin-bottom: 10px;\r\n    margin-left: -15px\r\n}\r\n.issue-detail .btn-upload {\r\n    position: relative;\r\n}\r\n.issue-detail .btn-upload input {\r\n    position: absolute;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    opacity: 0;\r\n}", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 38 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(39);
+	var content = __webpack_require__(43);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(33)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20368,10 +20608,10 @@
 	}
 
 /***/ },
-/* 39 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(32)();
 	// imports
 	
 	
