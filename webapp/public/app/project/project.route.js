@@ -10,15 +10,15 @@ module.exports = {
 				$stateProvider
 					.state('project', {
 						url: '/project',
-						templateUrl: 'partials/project'
+						templateUrl: '/app/project/project.html'
 					})
 					.state('project.list', {
 						url: '/list',
-						templateUrl: 'partials/project/list'
+						templateUrl: '/app/project/list/list.html'
 					})
 					.state('project.create', {
 						url: '/create',
-						templateUrl: 'partials/project/create'
+						templateUrl: '/app/project/create/create.html'
 					});
 			}
 		]);

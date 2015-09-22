@@ -27,7 +27,7 @@
 						<label class="col-lg-2 control-label">Assignee:</label>
 						<div class="col-lg-9">
 							<ul>
-								<li class="member" ng-click="selectAssignee(member)" ng-class="{selected: assignee === member}" ng-repeat="member in members" title="{{member.name}}"><img class="member-avatar" ng-src="{{member.figure}}" /></li>
+								<li class="member" ng-click="selectAssignee(member)" ng-class="{selected: assignee === member}" ng-repeat="member in members" title="{[{member.name}]}"><img class="member-avatar" ng-src="{[{member.figure}]}" /></li>
 							</ul>
 						</div>
 					</div>

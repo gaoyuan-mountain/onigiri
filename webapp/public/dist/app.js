@@ -68,21 +68,21 @@
 	
 	var services = _interopRequireWildcard(_loaderServiceAll);
 	
-	var _loaderRouteAll = __webpack_require__(20);
+	var _loaderRouteAll = __webpack_require__(21);
 	
 	var routes = _interopRequireWildcard(_loaderRouteAll);
 	
-	__webpack_require__(25);
+	__webpack_require__(26);
 	
-	__webpack_require__(30);
+	__webpack_require__(31);
 	
-	__webpack_require__(32);
+	__webpack_require__(33);
 	
-	__webpack_require__(34);
+	__webpack_require__(35);
 	
-	__webpack_require__(36);
+	__webpack_require__(37);
 	
-	__webpack_require__(38);
+	__webpack_require__(39);
 	
 	angular.module('Controllers', []);
 	angular.module('Directives', []);
@@ -91,8 +91,6 @@
 	angular.module('Routes', ['ui.router']);
 	angular.module('app', ['ngSanitize', 'ui.bootstrap', 'pasvaz.bindonce', 'Controllers', 'Directives', 'Services', 'Filters', 'Routes', 'gy.step']).config(['$locationProvider', '$interpolateProvider', function ($locationProvider, $interpolateProvider) {
 		$locationProvider.html5Mode(true);
-		$interpolateProvider.startSymbol('{[{');
-		$interpolateProvider.endSymbol('}]}');
 	}]);
 	
 	controllers.inject();
@@ -19426,7 +19424,17 @@
 	module.exports = {
 		inject: function inject() {
 			var module = angular.module('Controllers');
-			module.controller('projectListController', ['$scope', function ($scope) {}]);
+			module.controller('projectListController', ['$scope', 'ProjectService', function ($scope, ProjectService) {
+				$scope.projects = [];
+	
+				$scope.getAllProjects = function () {
+					ProjectService.getAll().then(function (response) {
+						$scope.projects = response.data || [];
+					});
+				};
+	
+				$scope.getAllProjects();
+			}]);
 		}
 	};
 
@@ -19439,7 +19447,7 @@
 	module.exports = {
 		inject: function inject() {
 			var module = angular.module('Controllers');
-			module.controller('projectCreateController', ['$scope', function ($scope) {
+			module.controller('projectCreateController', ['$scope', 'ProjectService', '$state', function ($scope, ProjectService, $state) {
 				$scope.members = [{
 					id: 0,
 					name: 'gaoyuan',
@@ -19461,6 +19469,16 @@
 					email: 'dp.gaoyuan@gmail.com',
 					figure: '/style/image/avatar4.png'
 				}];
+	
+				$scope.project = ProjectService.instance({});
+	
+				$scope.create = function () {
+					ProjectService.create($scope.project).then(function (response) {
+						if (response.data._id) {
+							$state.go('project.list');
+						}
+					});
+				};
 			}]);
 		}
 	};
@@ -19640,9 +19658,14 @@
 	
 	var _servicesUserService2 = _interopRequireDefault(_servicesUserService);
 	
+	var _servicesProjectService = __webpack_require__(20);
+	
+	var _servicesProjectService2 = _interopRequireDefault(_servicesProjectService);
+	
 	module.exports = {
 		inject: function inject() {
 			_servicesUserService2['default'].inject();
+			_servicesProjectService2['default'].inject();
 		}
 	};
 
@@ -19702,25 +19725,77 @@
 
 /***/ },
 /* 20 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = {
+		inject: function inject() {
+			var module = angular.module('Services');
+	
+			var Project = function Project(prop) {
+				var _prop = prop || {};
+				this.props = angular.extend({
+					_id: null,
+					title: '',
+					description: ''
+				}, _prop);
+			};
+	
+			Project.prototype.reset = function () {
+				this.props._id = null;
+			};
+	
+			Project.prototype.get = function (key) {
+				return this.props[key];
+			};
+	
+			Project.prototype.set = function (prop) {
+				angular.extend(this.props, prop);
+			};
+	
+			module.service('ProjectService', ['$http', function ($http) {
+				var self = this;
+	
+				this.instance = function (props) {
+					return new Project(props);
+				};
+	
+				this.create = function (project) {
+					return $http.post('/api/project/create', {
+						title: project.get('title'),
+						description: project.get('description')
+					});
+				};
+	
+				this.getAll = function () {
+					return $http.get('/api/project/getAll');
+				};
+			}]);
+		}
+	};
+
+/***/ },
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 	
-	var _loginLoginRoute = __webpack_require__(21);
+	var _loginLoginRoute = __webpack_require__(22);
 	
 	var loginRouter = _interopRequireWildcard(_loginLoginRoute);
 	
-	var _projectProjectRoute = __webpack_require__(22);
+	var _projectProjectRoute = __webpack_require__(23);
 	
 	var projectRouter = _interopRequireWildcard(_projectProjectRoute);
 	
-	var _issuesIssuesRoute = __webpack_require__(23);
+	var _issuesIssuesRoute = __webpack_require__(24);
 	
 	var issuesRouter = _interopRequireWildcard(_issuesIssuesRoute);
 	
-	var _milestoneMilestoneRoute = __webpack_require__(24);
+	var _milestoneMilestoneRoute = __webpack_require__(25);
 	
 	var milestoneRouter = _interopRequireWildcard(_milestoneMilestoneRoute);
 	
@@ -19734,7 +19809,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19745,34 +19820,10 @@
 			module.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 				$stateProvider.state('login', {
 					url: '/login',
-					templateUrl: 'partials/login'
+					templateUrl: '/app/login/login.html'
 				}).state('default', {
 					url: '/',
-					templateUrl: 'partials/login'
-				});
-			}]);
-		}
-	};
-
-/***/ },
-/* 22 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = {
-		inject: function inject() {
-			var module = angular.module('Routes');
-			module.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-				$stateProvider.state('project', {
-					url: '/project',
-					templateUrl: 'partials/project'
-				}).state('project.list', {
-					url: '/list',
-					templateUrl: 'partials/project/list'
-				}).state('project.create', {
-					url: '/create',
-					templateUrl: 'partials/project/create'
+					templateUrl: '/app/login/login.html'
 				});
 			}]);
 		}
@@ -19788,18 +19839,15 @@
 		inject: function inject() {
 			var module = angular.module('Routes');
 			module.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-				$stateProvider.state('issues', {
-					url: '/issues',
-					templateUrl: 'partials/issues/index'
-				}).state('issues.list', {
-					url: '/:projectId',
-					templateUrl: 'partials/issues/list'
-				}).state('issues.detail', {
-					url: '/:projectId/detail/:issueId',
-					templateUrl: 'partials/issues/detail'
-				}).state('issues.create', {
-					url: '/:projectId/create',
-					templateUrl: 'partials/issues/create'
+				$stateProvider.state('project', {
+					url: '/project',
+					templateUrl: '/app/project/project.html'
+				}).state('project.list', {
+					url: '/list',
+					templateUrl: '/app/project/list/list.html'
+				}).state('project.create', {
+					url: '/create',
+					templateUrl: '/app/project/create/create.html'
 				});
 			}]);
 		}
@@ -19807,6 +19855,33 @@
 
 /***/ },
 /* 24 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = {
+		inject: function inject() {
+			var module = angular.module('Routes');
+			module.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+				$stateProvider.state('issues', {
+					url: '/issues',
+					templateUrl: '/app/issues/index.html'
+				}).state('issues.list', {
+					url: '/:projectId',
+					templateUrl: '/app/issues/list.html'
+				}).state('issues.detail', {
+					url: '/:projectId/detail/:issueId',
+					templateUrl: '/app/issues/detail.html'
+				}).state('issues.create', {
+					url: '/:projectId/create',
+					templateUrl: '/app/issues/create.html'
+				});
+			}]);
+		}
+	};
+
+/***/ },
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -19824,14 +19899,14 @@
 	};
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	__webpack_require__(1);
 	
-	__webpack_require__(26);
+	__webpack_require__(27);
 	
 	var _module = angular.module('gy.step', []);
 	
@@ -19862,16 +19937,16 @@
 	_module.exports = _module;
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(27);
+	var content = __webpack_require__(28);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -19888,10 +19963,10 @@
 	}
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -19902,7 +19977,7 @@
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	/*
@@ -19957,7 +20032,7 @@
 	};
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -20182,16 +20257,16 @@
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(31);
+	var content = __webpack_require__(32);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20208,30 +20283,30 @@
 	}
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".login-constraint .banner {\r\n\tbackground: url(/style/image/banner.png) #4d8eb4 center bottom/contain no-repeat;\r\n\twidth: 100%;\r\n\theight: 240px;\r\n}\r\n.login-constraint .main {\r\n\twidth: 300px;\r\n\tmargin: 0 auto;\r\n}\r\n.login-constraint form {\r\n\tmargin-top: 20px;\r\n}\r\n.login-constraint .form-group {\r\n\tdisplay: inline-block;\r\n\twidth: 100%;\r\n\tmargin-top: 20px;\r\n}\r\n.login-constraint .form-group input {\r\n\tpadding: 12px;\r\n\tfont-size: 16px;\r\n\tline-height: 20px;\r\n\tbox-shadow: none;\r\n\tborder: 1px solid #ccc;\r\n}\r\n.login-constraint .form-group input:focus {\r\n\tbox-shadow: none;\r\n}\r\n.login-constraint .btn-line-green {\r\n\tdisplay: inline-block;\r\n\tbackground: #87c5e6;\r\n\tcolor: #fff;\r\n\ttext-align: center;\r\n\ttext-decoration: none;\r\n\tpadding: 6px;\r\n\tfont-size: 16px;\r\n\twidth: 100%;\r\n\tborder-radius: 3px;\r\n\tborder: 1px solid #87c5e6;\r\n\tcursor: pointer;\r\n}\r\n", ""]);
+	exports.push([module.id, ".login-constraint .banner {\r\n\tbackground: url(/style/image/banner.png) #4d8eb4 center bottom/contain no-repeat;\r\n\twidth: 100%;\r\n\theight: 240px;\r\n}\r\n.login-constraint .main {\r\n\twidth: 300px;\r\n\tmargin: 0 auto;\r\n}\r\n.login-constraint form {\r\n\tmargin-top: 20px;\r\n}\r\n.login-constraint .form-group {\r\n\tdisplay: inline-block;\r\n\twidth: 100%;\r\n\tmargin-top: 20px;\r\n}\r\n.login-constraint .form-group input {\r\n\tpadding: 12px;\r\n\tfont-size: 16px;\r\n\tline-height: 20px;\r\n\tbox-shadow: none;\r\n\tborder: 1px solid #ccc;\r\n}\r\n.login-constraint .form-group input:focus {\r\n\tbox-shadow: none;\r\n}\r\n.login-constraint input.btn-line-green {\r\n\tdisplay: inline-block;\r\n\tbackground: #87c5e6;\r\n\tcolor: #fff;\r\n\ttext-align: center;\r\n\ttext-decoration: none;\r\n\tfont-size: 16px;\r\n\twidth: 100%;\r\n\tborder-radius: 3px;\r\n\tborder: 1px solid #87c5e6;\r\n\tcursor: pointer;\r\n}\r\n", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(33);
+	var content = __webpack_require__(34);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20248,10 +20323,10 @@
 	}
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -20262,16 +20337,16 @@
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(35);
+	var content = __webpack_require__(36);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20288,10 +20363,10 @@
 	}
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
@@ -20302,16 +20377,16 @@
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(37);
+	var content = __webpack_require__(38);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20328,30 +20403,30 @@
 	}
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	
 	// module
-	exports.push([module.id, ".issue-edit-popover {\r\n\tfont-size: 13px;\r\n}\r\n.issue-edit-popover .btn-sm {\r\n\tfont-size: 12px;\r\n\tmargin-top: 3px;\r\n}\r\n.issue-filter {\r\n\tmargin-top: 35px;\r\n}\r\n.issue-filter a {\r\n\tcolor: #aaa;\r\n\ttext-shadow: 1px 1px 0 #fff;\r\n}\r\n.issue-filter .active a, .issue-filter a .badge {\r\n\tcolor: #fff;\r\n\ttext-shadow: none;\r\n}\r\n.new-issue-btn {\r\n\tposition: absolute;\r\n\tright: 0;\r\n\ttop: 15px;\r\n}\r\n.issue-list-main {\r\n\tposition: relative;\r\n\tmargin-top: 20px;\r\n}\r\n.main-offset-constraint {\r\n\tmargin-left: -16.66666667%;\r\n}\r\n.issue {\r\n    background: #fff;\r\n    padding: 15px;\r\n    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    margin-top: 20px;\r\n    cursor: pointer;\r\n}\r\n.issue a {\r\n\tcolor: #777;\r\n}\r\n.issue-logo {\r\n    float: left;\r\n    width: 42px;\r\n    height: 42px;\r\n    background: url(/style/image/project-logo.png) no-repeat;\r\n    background-size: contain;\r\n    margin-right: 20px;\r\n}\r\n.issue h2 {\r\n    font-size: 14px;\r\n    font-weight: bold;\r\n    margin-bottom: 9px;\r\n}\r\n.issue p {\r\n    margin-bottom: 0;\r\n    font-size: 13px;\r\n}\r\n.issue-detail {\r\n    margin: 80px auto;\r\n}\r\n.issue-detail .issue-new-form {\r\n    background: #fff;\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    padding: 40px 30px;\r\n}\r\n.issue-detail .form-group {\r\n    margin-bottom: 30px;\r\n}\r\n.issue-detail .member {\r\n    width: 40px;\r\n    height: 40px;\r\n    float: left;\r\n    margin-right: 20px;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    -webkit-transition: all .2s ease-out;\r\n}\r\n.issue-detail .member img {\r\n    max-width: 100%;\r\n}\r\n.issue-detail .member.selected {\r\n    box-shadow: 3px 3px 7px rgba(0,0,0,0.4);\r\n    -webkit-transform: scale(1.3);\r\n}", ""]);
+	exports.push([module.id, ".issue-edit-popover {\r\n\tfont-size: 13px;\r\n}\r\n.issue-edit-popover .btn-sm {\r\n\tfont-size: 12px;\r\n\tmargin-top: 3px;\r\n}\r\n.issue-filter {\r\n\tmargin-top: 35px;\r\n}\r\n.issue-filter a {\r\n\tcolor: #aaa;\r\n\ttext-shadow: 1px 1px 0 #fff;\r\n}\r\n.issue-filter .active a, .issue-filter a .badge {\r\n\tcolor: #fff;\r\n\ttext-shadow: none;\r\n}\r\n.new-issue-btn {\r\n\tposition: absolute;\r\n\tright: 0;\r\n\ttop: 15px;\r\n}\r\n.issue-list-main {\r\n\tposition: relative;\r\n\tmargin-top: 20px;\r\n}\r\n.issue {\r\n    background: #fff;\r\n    padding: 15px;\r\n    -webkit-box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    margin-top: 20px;\r\n    cursor: pointer;\r\n}\r\n.issue a {\r\n\tcolor: #777;\r\n}\r\n.issue-logo {\r\n    float: left;\r\n    width: 42px;\r\n    height: 42px;\r\n    background: url(/style/image/project-logo.png) no-repeat;\r\n    background-size: contain;\r\n    margin-right: 20px;\r\n}\r\n.issue h2 {\r\n    font-size: 14px;\r\n    font-weight: bold;\r\n    margin-bottom: 9px;\r\n}\r\n.issue p {\r\n    margin-bottom: 0;\r\n    font-size: 13px;\r\n}\r\n.issue-detail {\r\n    margin: 80px auto;\r\n}\r\n.issue-detail .issue-new-form {\r\n    background: #fff;\r\n    box-shadow: 1px 1px 2px rgba(0,0,0,0.3);\r\n    padding: 40px 30px;\r\n}\r\n.issue-detail .form-group {\r\n    margin-bottom: 30px;\r\n}\r\n.issue-detail .member {\r\n    width: 40px;\r\n    height: 40px;\r\n    float: left;\r\n    margin-right: 20px;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    overflow: hidden;\r\n    -webkit-transition: all .2s ease-out;\r\n}\r\n.issue-detail .member img {\r\n    max-width: 100%;\r\n}\r\n.issue-detail .member.selected {\r\n    box-shadow: 3px 3px 7px rgba(0,0,0,0.4);\r\n    -webkit-transform: scale(1.3);\r\n}", ""]);
 	
 	// exports
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(39);
+	var content = __webpack_require__(40);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(29)(content, {});
+	var update = __webpack_require__(30)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -20368,10 +20443,10 @@
 	}
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(28)();
+	exports = module.exports = __webpack_require__(29)();
 	// imports
 	
 	

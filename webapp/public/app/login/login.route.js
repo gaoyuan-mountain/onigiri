@@ -10,11 +10,11 @@ module.exports = {
 				$stateProvider
 					.state('login', {
 					url: '/login',
-					templateUrl: 'partials/login'
+					templateUrl: '/app/login/login.html'
 				})
 				.state('default', {
 					url: '/',
-					templateUrl: 'partials/login'
+					templateUrl: '/app/login/login.html'
 				});
 			}
 		]);

@@ -5,7 +5,9 @@ module.exports = {
 		var module = angular.module('Controllers');
 		module.controller('projectCreateController', [
 			'$scope',
-			function ($scope) {
+			'ProjectService',
+			'$state',
+			function ($scope, ProjectService, $state) {
 				$scope.members = [{
 					id: 0,
 					name: 'gaoyuan',
@@ -27,6 +29,16 @@ module.exports = {
 					email: 'dp.gaoyuan@gmail.com',
 					figure: '/style/image/avatar4.png'
 				}];
+
+				$scope.project = ProjectService.instance({});
+
+				$scope.create = function () {
+					ProjectService.create($scope.project).then(function (response) {
+						if (response.data._id) {
+							$state.go('project.list');
+						}
+					});
+				};
 			}
 		]);
 	}
