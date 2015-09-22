@@ -5,6 +5,10 @@ var login = require('./login.route');
 var project = require('./project.route');
 var issues = require('./issues.route');
 var milestone = require('./milestone.route');
+var attachment = require('./attachment.route');
+
+var multer  = require('multer');
+var upload = multer({ dest: '/uploads/' });
 
 module.exports = function (app) {
 	app.get('/', index.view);
@@ -29,6 +33,9 @@ module.exports = function (app) {
 	app.get('/api/project/getAll', project.getAll);
 	
 	//issues
+	
+	//attachment
+	app.post('/api/attachment/upload', upload.single('file'), attachment.create);
 	
 	//milestone
 

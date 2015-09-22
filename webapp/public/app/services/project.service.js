@@ -26,8 +26,6 @@ module.exports = {
 		module.service('ProjectService', [
 			'$http',
 			function ($http) {
-				var self = this;
-
 				this.instance = function (props) {
 					return new Project(props);
 				};

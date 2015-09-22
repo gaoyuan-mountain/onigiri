@@ -4,6 +4,7 @@
   "devDependencies": {
     "express-session": "^1.11.3",
     "mongoose": "^4.1.6",
+    "multer": "^1.0.5",
     "parseurl": "^1.3.0"
   },
   "dependencies": {

@@ -6,6 +6,7 @@ exports.view = function (req, res) {
 	var pathname = parseurl(req).pathname;
 	if (!user && pathname !== '/' && pathname !== '/login' && pathname !== '/index') {
 		res.status(403).redirect('/login');
+		return;
 	}
     res.render('index');
 };

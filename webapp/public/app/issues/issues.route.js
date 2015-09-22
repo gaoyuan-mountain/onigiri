@@ -8,19 +8,19 @@ module.exports = {
 				$stateProvider
 					.state('issues', {
 						url: '/issues',
-						templateUrl: '/app/issues/index.html'
+						templateUrl: '/app/issues/issues.html'
 					})
 					.state('issues.list', {
 						url: '/:projectId',
-						templateUrl: '/app/issues/list.html'
+						templateUrl: '/app/issues/list/list.html'
 					})
 					.state('issues.detail', {
 						url: '/:projectId/detail/:issueId',
-						templateUrl: '/app/issues/detail.html'
+						templateUrl: '/app/issues/detail/detail.html'
 					})
 					.state('issues.create', {
 						url: '/:projectId/create',
-						templateUrl: '/app/issues/create.html'
+						templateUrl: '/app/issues/create/create.html'
 					});
 			}
 		]);
