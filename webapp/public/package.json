@@ -1,0 +1,42 @@
+{
+  "name": "onigiri",
+  "version": "0.0.0",
+  "description": "a bug track tool",
+  "main": "",
+  "scripts": {},
+  "author": "dp.gaoyuan@gmail.com",
+  "license": "Gaoyuan",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freewind/grunt-bower-angular-demo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/freewind/grunt-bower-angular-demo/issues"
+  },
+  "devDependencies": {
+    "angular-bindonce": "^0.3.1",
+    "angular-bootstrap": "^0.12.2",
+    "angular-route": "^1.4.5",
+    "angular-sanitize": "^1.4.5",
+    "angular-ui-router": "^0.2.15",
+    "babel-core": "^5.8.12",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.15.6",
+    "gulp": "^3.9.0",
+    "gulp-uglify": "^1.4.0",
+    "gulp-util": "^3.0.6",
+    "json-loader": "^0.5.2",
+    "less": "^2.5.1",
+    "less-loader": "^2.2.0",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1"
+  },
+  "dependencies": {
+    "angular": "^1.4.3",
+    "angular-bootstrap": "^0.12.2",
+    "angular-resource": "^1.4.3",
+    "angular-ui-bootstrap": "^0.13.1",
+    "bootstrap": "^3.3.5"
+  }
+}

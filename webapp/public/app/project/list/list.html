@@ -1,0 +1,13 @@
+<div ng-controller="projectListController" class="stage">
+	<div class="main-constraint">
+		<ul class="projects clearfix">
+			<li ng-repeat="project in projects track by project._id" class="project clearfix">
+				<a ui-sref="issues.list({projectId: project._id})">
+					<div class="project-logo"></div>
+					<h2 ng-bind="project.title"></h2>
+					<p ng-bind="project.description"></p>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

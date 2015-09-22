@@ -1,0 +1,91 @@
+<div ng-controller="issuesCreateController" class="stage">
+	<div class="main-constraint issue-detail">
+		<ul class="breadcrumb">
+			<li><a href="#">Projects</a></li>
+			<li><a href="#">issues</a></li>
+			<li class="active">Create</li>
+		</ul>
+		<div class="issue-new-form">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group" style="margin-bottom:50px">
+						<div gy-step="issueStausConfig"></div>
+					</div>
+					<div class="form-group">
+						<label for="issueTitle" class="col-lg-2 control-label">Title:</label>
+						<div class="col-lg-9">
+							<input type="text" class="form-control" id="issueTitle" placeholder="title">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="issueUrl" class="col-lg-2 control-label">Url:</label>
+						<div class="col-lg-9">
+							<input type="text" class="form-control" id="issueUrl" placeholder="url">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Assignee:</label>
+						<div class="col-lg-9">
+							<ul>
+								<li class="member" ng-click="selectAssignee(member)" ng-class="{selected: assignee === member}" ng-repeat="member in members" title="{{member.name}}"><img class="member-avatar" ng-src="{{member.figure}}" /></li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Browser:</label>
+						<div class="col-lg-3">
+							<select class="form-control" id="browser">
+								<option>Chrome</option>
+								<option>Firefox</option>
+								<option>Safari</option>
+								<option>360</option>
+								<option>IE</option>
+								<option>All</option>
+							</select>
+						</div>
+						<div class="col-lg-3">
+							<input type="text" class="form-control" id="browserVersion" placeholder="version">
+						</div>
+						<div class="col-lg-3">
+							<input type="text" class="form-control" id="platform" placeholder="operation system">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="issueAccount" class="col-lg-2 control-label">Testing Account:</label>
+						<div class="col-lg-3">
+							<input type="text" class="form-control" id="issueAccount" placeholder="account">
+						</div>
+						<div class="col-lg-3">
+							<input type="text" class="form-control" id="issuePassword" placeholder="password">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="issueDescription" class="col-lg-2 control-label">Description:</label>
+						<div class="col-lg-9">
+							<textarea class="form-control" rows="5" id="issueDescription"></textarea>
+							<span class="help-block">Should tell The more detailed the better.</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-9 col-lg-offset-2">
+							<a href="#" class="btn btn-success btn-sm">Upload Attachment</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<div class="clearfix" style="margin-top: 30px;">
+				<div class="col-lg-4 col-lg-offset-1">
+					<div class="checkbox col-lg-offset-1">
+						<label>
+							<input type="checkbox"> Check this issue out first, please.
+						</label>
+					</div>
+				</div>
+				<div class="pull-right">
+					<button type="button" class="btn btn-primary">Send</button>
+					<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,95 @@
+<div ng-controller="issuesCreateController" class="stage">
+	<div class="main-constraint issue-detail">
+		<ul class="breadcrumb">
+			<li><a href="#">Projects</a></li>
+			<li><a href="#">issues</a></li>
+			<li class="active">Create</li>
+		</ul>
+		<div class="issue-new-form">
+			<form class="form-horizontal">
+				<fieldset>
+					<div class="form-group" style="margin-bottom:50px">
+						<div gy-step="issueStatusConfig"></div>
+					</div>
+					<div class="form-group">
+						<label for="issueTitle" class="col-lg-2 control-label">Title:</label>
+						<div class="col-lg-9">
+							<input type="text" class="form-control" id="issueTitle" placeholder="title" ng-model="issue.props.title">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="issueUrl" class="col-lg-2 control-label">Url:</label>
+						<div class="col-lg-9">
+							<input type="text" class="form-control" id="issueUrl" placeholder="url" ng-model="issue.props.url">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Assignee:</label>
+						<div class="col-lg-9">
+							<ul>
+								<li class="member" ng-click="selectAssignee(member)" ng-class="{selected: assignee === member}" ng-repeat="member in members" title="{{member.name}}"><img class="member-avatar" ng-src="{{member.figure}}" /></li>
+							</ul>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 control-label">Browser:</label>
+						<div class="col-lg-10">
+							<div class="clearfix browser" ng-repeat="issueBrowser in issue.props.browsers">
+								<div class="col-lg-4">
+									<select class="form-control" ng-options="browser.name as browser.name for browser in browsers" ng-model="issueBrowser.name"></select>
+								</div>
+								<div class="col-lg-3">
+									<input type="text" class="form-control" id="browserVersion" placeholder="version" ng-model="issueBrowser.version">
+								</div>
+								<div class="col-lg-3">
+									<input type="text" class="form-control" id="platform" placeholder="operation system" ng-model="issueBrowser.system">
+								</div>
+								<div class="col-lg-2" ng-if="$last">
+									<a class="add-test-environment" ng-click="addBrowser()"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="issueAccount" class="col-lg-2 control-label">Testing Account:</label>
+						<div class="col-lg-3">
+							<input type="text" class="form-control" id="issueAccount" placeholder="account" ng-model="issue.props.account.name">
+						</div>
+						<div class="col-lg-3">
+							<input type="text" class="form-control" id="issuePassword" placeholder="password" ng-model="issue.props.account.password">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="issueDescription" class="col-lg-2 control-label">Description:</label>
+						<div class="col-lg-9">
+							<textarea class="form-control" rows="5" id="issueDescription" ng-model="issue.props.description"></textarea>
+							<span class="help-block">Should tell The more detailed the better.</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-lg-9 col-lg-offset-2">
+							<a class="issue-attachment" ng-repeat="attachment in issue.props.attachments">{{ attachment.name }}</a>
+							<span class="btn btn-success btn-sm btn-upload">
+								Upload Attachment
+								<input type="file" file-model="attachment" />
+							</span>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+			<div class="clearfix" style="margin-top: 30px;">
+				<div class="col-lg-4 col-lg-offset-1">
+					<div class="checkbox col-lg-offset-1">
+						<label>
+							<input type="checkbox" ng-checked="issue.prior"> Check this issue out first, please.
+						</label>
+					</div>
+				</div>
+				<div class="pull-right">
+					<button type="button" class="btn btn-primary">Send</button>
+					<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

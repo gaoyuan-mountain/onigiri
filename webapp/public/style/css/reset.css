@@ -1,0 +1,118 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    min-height: 100%;
+    font-family: Tahoma;
+}
+
+h1,
+h2,
+h3 {
+    padding: 0;
+    margin: 0;
+}
+
+div,
+a,
+ul,
+li {
+    box-sizing: border-box;
+}
+
+ul,
+li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    -webkit-transition: background-color 218ms ease, color 218ms ease;
+    -o-transition: background-color 218ms ease, color 218ms ease;
+    transition: background-color 218ms ease, color 218ms ease;
+}
+
+a:hover,
+a:focus {
+    color: #87c5e6;
+    text-decoration: none;
+    outline: none;
+}
+
+button:focus {
+    outline: none;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    height: auto;
+    box-sizing: border-box;
+    outline: none;
+}
+
+textarea,
+textarea.form-control,
+input.form-control,
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],
+[type=text].form-control,
+[type=password].form-control,
+[type=email].form-control,
+[type=tel].form-control,
+[contenteditable].form-control,
+select,
+select.form-control {
+    font-size: 13px;
+    resize: none;
+    padding-bottom: 7px;
+}
+
+.form-horizontal .form-control {
+    padding-top: 7px;
+}
+
+.main-view {
+    float: left;
+    width: 100%;
+    height: 100%;
+}
+
+.main-constraint {
+    width: 1160px;
+    margin: 52px auto 0;
+    padding-top: 15px;
+}
+
+.stage {
+    float: left;
+    width: 100%;
+    min-height: 100%;
+    background: #f0f0f2;
+}
+
+.pagination-wrap {
+    text-align: center;
+}
+
+.breadcrumb {
+    font-size: 14px;
+    background-color: transparent;
+    padding: 0;
+}

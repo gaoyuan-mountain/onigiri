@@ -1,0 +1,27 @@
+<nav class="navbar navbar-default navbar-fixed-top" bs-navbar ng-controller="headerController">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#">Onigiri</a>
+    </div>
+    <ul class="nav navbar-nav">
+        <li ui-sref-active="active"><a ui-sref="project.list()">Projects</a></li>
+        <li ui-sref-active="active"><a ui-sref="milestone()" ng-class="{active: $state.includes('milestone')}">Milestone</a></li>
+        <li><a>Groups</a></li>
+    </ul>
+    <div class="setting-constraint pull-right">
+        <div class="nav-handler">
+            <a class="user-setting"></a>
+        </div>
+        <div class="nav-handler">
+            <div class="btn-group" dropdown is-open="status.isopen">
+                <button id="single-button" type="button" class="btn btn-primary" dropdown-toggle ng-disabled="disabled">
+                    <span class="glyphicon glyphicon-plus"></span> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                    <li role="menuitem"><a ui-sref="project.create()">Create new project</a></li>
+                    <li class="divider"></li>
+                    <li role="menuitem"><a href="#">Invite members</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
